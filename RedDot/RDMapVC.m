@@ -101,11 +101,8 @@ BOOL isRetina = FALSE;
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
     
-    [[Config shareInstance] initBaiduMap];
-    mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 420)];
-    [self.view addSubview:mapView];
-    mapView.centerCoordinate    =   CLLocationCoordinate2DMake(120.2,30.3);
-    [mapView setShowsUserLocation:YES];//显示定位的蓝点儿
+    //self.mapView.centerCoordinate    =   CLLocationCoordinate2DMake(120.2,30.3);
+    //[self.mapView setShowsUserLocation:YES];//显示定位的蓝点儿
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,19 +113,19 @@ BOOL isRetina = FALSE;
 
 -(void)dealloc
 {
-    [mapView release];
+    [_mapView release];
     [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [mapView viewWillAppear];
-    mapView.delegate    =   self;
+    //[self.mapView viewWillAppear];
+    //self.mapView.delegate    =   self;
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [mapView viewWillDisappear];
-    mapView.delegate    =   nil;
+    //[self.mapView viewWillDisappear];
+    //self.mapView.delegate    =   nil;
 }
 
 - (NSString*)getMyBundlePath1:(NSString *)filename

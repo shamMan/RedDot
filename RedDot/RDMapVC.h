@@ -11,7 +11,8 @@
 
 @interface RDMapVC : UIViewController <BMKMapViewDelegate>
 {
-    BMKMapView* mapView;//地图视图
 }
+@property (retain, nonatomic) IBOutlet BMKMapView *mapView;
+
 
 @end
