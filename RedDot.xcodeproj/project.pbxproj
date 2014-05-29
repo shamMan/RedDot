@@ -16,7 +16,6 @@
 		0470492E1936C4EE00182A69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0470492D1936C4EE00182A69 /* Default.png */; };
 		047049301936C4EE00182A69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0470492F1936C4EE00182A69 /* Default@2x.png */; };
 		047049321936C4EE00182A69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047049311936C4EE00182A69 /* Default-568h@2x.png */; };
-		0470493B1936C59500182A69 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470493A1936C59500182A69 /* libbaidumapapi.a */; };
 		0470497B1936C84300182A69 /* RDMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047049791936C84300182A69 /* RDMainVC.m */; };
 		0470497C1936C84300182A69 /* RDMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0470497A1936C84300182A69 /* RDMainVC.xib */; };
 		047049801936DA8A00182A69 /* RDConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0470497F1936DA8A00182A69 /* RDConfig.mm */; };
@@ -28,6 +27,7 @@
 		0470498D193711AB00182A69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470498C193711AB00182A69 /* CFNetwork.framework */; };
 		0470498F1937124300182A69 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470498E1937124300182A69 /* SystemConfiguration.framework */; };
 		047049911937127200182A69 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047049901937127100182A69 /* Security.framework */; };
+		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,6 @@
 		0470492D1936C4EE00182A69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0470492F1936C4EE00182A69 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		047049311936C4EE00182A69 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0470493A1936C59500182A69 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = "Libs/Release-iphonesimulator/libbaidumapapi.a"; sourceTree = "<group>"; };
 		0470493D1936C5A400182A69 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
 		0470493E1936C5A400182A69 /* BMKActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKActionPaopaoView.h; sourceTree = "<group>"; };
 		0470493F1936C5A400182A69 /* BMKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKAnnotation.h; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		0470498C193711AB00182A69 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0470498E1937124300182A69 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		047049901937127100182A69 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 				0470491C1936C4EE00182A69 /* UIKit.framework in Frameworks */,
 				0470491E1936C4EE00182A69 /* Foundation.framework in Frameworks */,
 				047049201936C4EE00182A69 /* CoreGraphics.framework in Frameworks */,
-				0470493B1936C59500182A69 /* libbaidumapapi.a in Frameworks */,
+				45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +214,7 @@
 		047049391936C53E00182A69 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				0470493A1936C59500182A69 /* libbaidumapapi.a */,
+				45D667E519376F4F0068782E /* libbaidumapapi.a */,
 			);
 			name = Libs;
 			sourceTree = "<group>";
@@ -449,9 +449,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libs/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/Libs\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -464,9 +466,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libs/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/Libs\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
