@@ -12,7 +12,7 @@
 		047049201936C4EE00182A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470491F1936C4EE00182A69 /* CoreGraphics.framework */; };
 		047049261936C4EE00182A69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 047049241936C4EE00182A69 /* InfoPlist.strings */; };
 		047049281936C4EE00182A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 047049271936C4EE00182A69 /* main.m */; };
-		0470492C1936C4EE00182A69 /* RDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470492B1936C4EE00182A69 /* RDAppDelegate.m */; };
+		0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0470492B1936C4EE00182A69 /* RDAppDelegate.mm */; };
 		0470492E1936C4EE00182A69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0470492D1936C4EE00182A69 /* Default.png */; };
 		047049301936C4EE00182A69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0470492F1936C4EE00182A69 /* Default@2x.png */; };
 		047049321936C4EE00182A69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047049311936C4EE00182A69 /* Default-568h@2x.png */; };
@@ -27,6 +27,7 @@
 		0470498D193711AB00182A69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470498C193711AB00182A69 /* CFNetwork.framework */; };
 		0470498F1937124300182A69 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470498E1937124300182A69 /* SystemConfiguration.framework */; };
 		047049911937127200182A69 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047049901937127100182A69 /* Security.framework */; };
+		047049931938523500182A69 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047049921938523500182A69 /* mapapi.bundle */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +41,7 @@
 		047049271936C4EE00182A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		047049291936C4EE00182A69 /* RedDot-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RedDot-Prefix.pch"; sourceTree = "<group>"; };
 		0470492A1936C4EE00182A69 /* RDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDAppDelegate.h; sourceTree = "<group>"; };
-		0470492B1936C4EE00182A69 /* RDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDAppDelegate.m; sourceTree = "<group>"; };
+		0470492B1936C4EE00182A69 /* RDAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RDAppDelegate.mm; sourceTree = "<group>"; };
 		0470492D1936C4EE00182A69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0470492F1936C4EE00182A69 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		047049311936C4EE00182A69 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		0470498C193711AB00182A69 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0470498E1937124300182A69 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		047049901937127100182A69 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		047049921938523500182A69 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Res/mapapi.bundle; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,7 +186,7 @@
 				0470497F1936DA8A00182A69 /* RDConfig.mm */,
 				0470497D1936C84F00182A69 /* VC */,
 				0470492A1936C4EE00182A69 /* RDAppDelegate.h */,
-				0470492B1936C4EE00182A69 /* RDAppDelegate.m */,
+				0470492B1936C4EE00182A69 /* RDAppDelegate.mm */,
 				047049221936C4EE00182A69 /* Supporting Files */,
 			);
 			path = RedDot;
@@ -207,6 +209,7 @@
 		047049381936C53800182A69 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				047049921938523500182A69 /* mapapi.bundle */,
 			);
 			name = Res;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				047049321936C4EE00182A69 /* Default-568h@2x.png in Resources */,
 				0470497C1936C84300182A69 /* RDMainVC.xib in Resources */,
 				047049851937005700182A69 /* RDMapVC.xib in Resources */,
+				047049931938523500182A69 /* mapapi.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				047049281936C4EE00182A69 /* main.m in Sources */,
-				0470492C1936C4EE00182A69 /* RDAppDelegate.m in Sources */,
+				0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */,
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,

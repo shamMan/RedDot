@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BMapKit.h"
 
-@interface RDAppDelegate : UIResponder <UIApplicationDelegate>
+@interface RDAppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate>
+{
+@private BMKMapManager* _mapManager;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

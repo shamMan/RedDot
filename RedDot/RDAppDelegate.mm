@@ -12,15 +12,32 @@
 
 @implementation RDAppDelegate
 
+#pragma mark - Baidu Map
+- (void)onGetNetworkState:(int)iError
+{
+    //[self PLOG:@"BAIDU-MAP::onGetNetworkState:%d",iError];
+}
+- (void)onGetPermissionState:(int)iError
+{
+    //[self PLOG:@"BAIDU-MAP::onGetPermissionState:%d",iError];
+}
+
 - (void)dealloc
 {
+    [_mapManager release];
     [_window release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[Config shareInstance] initBaiduMap];
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:kBaiduMapKey  generalDelegate:self];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

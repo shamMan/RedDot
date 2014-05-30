@@ -23,30 +23,7 @@
     return sharedConfigInstance;
 }
 
-#pragma mark - Baidu Map
-- (void)onGetNetworkState:(int)iError
-{
-    [self PLOG:@"BAIDU-MAP::onGetNetworkState:%d",iError];
-}
-- (void)onGetPermissionState:(int)iError
-{
-    [self PLOG:@"BAIDU-MAP::onGetPermissionState:%d",iError];
-}
 
-- (BOOL)initBaiduMap
-{
-    if (_mapManager) {
-        return TRUE;
-    }
-    _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定generalDelegate参数
-    BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:self];
-    if (!ret)
-    {
-        [self PLOG:@"initBaiduMap Failed!"];
-    }
-    return ret;
-}
 
 - (NSString*)GetServerAddress
 {
@@ -79,7 +56,6 @@
 #pragma mark - NSObject
 - (void)dealloc 
 {
-    [_mapManager release];
     [super dealloc];
 }
 

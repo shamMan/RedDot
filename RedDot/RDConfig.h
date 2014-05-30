@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "BMapKit.h"
 
 @protocol DebugProctocal <NSObject>
 @optional
@@ -34,14 +33,13 @@
 //static NSString* kBaiduMapKey   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 static NSString* UNUSED_PARAM(kBaiduMapKey)   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 
-@interface Config : NSObject <BMKGeneralDelegate>
+@interface Config : NSObject
 @property (assign,nonatomic) id<DebugProctocal> delegateD;
-@property (readonly,nonatomic) BMKMapManager*   mapManager;
 
 #pragma mark - Singleton
 + (Config*)shareInstance;
 #pragma mark - Unity
-- (BOOL)initBaiduMap;
+//- (BOOL)initBaiduMap;
 
 #pragma mark - Debug Tool
 - (void)PLOG:(NSString *)format, ...;

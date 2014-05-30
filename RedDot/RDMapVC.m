@@ -99,9 +99,10 @@ BOOL isRetina = FALSE;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [super viewDidLoad];
-    
-    //self.mapView.centerCoordinate    =   CLLocationCoordinate2DMake(120.2,30.3);
+    _mapView    =   [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 400)];
+    self.view   =   _mapView;
+    //[self.view addSubview:_mapView];
+    _mapView.centerCoordinate    =   CLLocationCoordinate2DMake(120.2,30.3);
     //[self.mapView setShowsUserLocation:YES];//显示定位的蓝点儿
 }
 
@@ -113,19 +114,19 @@ BOOL isRetina = FALSE;
 
 -(void)dealloc
 {
-    [_mapView release];
     [super dealloc];
+    //[_mapView release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //[self.mapView viewWillAppear];
-    //self.mapView.delegate    =   self;
+    [self.mapView viewWillAppear];
+    self.mapView.delegate    =   self;
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[self.mapView viewWillDisappear];
-    //self.mapView.delegate    =   nil;
+    [self.mapView viewWillDisappear];
+    self.mapView.delegate    =   nil;
 }
 
 - (NSString*)getMyBundlePath1:(NSString *)filename
