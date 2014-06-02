@@ -146,6 +146,7 @@
 		0470490F1936C4EE00182A69 = {
 			isa = PBXGroup;
 			children = (
+				45D3352D193AFB1E00D880A8 /* edog_port */,
 				0470493C1936C5A400182A69 /* baidu_inc */,
 				047049391936C53E00182A69 /* Libs */,
 				047049381936C53800182A69 /* Res */,
@@ -300,6 +301,14 @@
 				047049831937005700182A69 /* RDMapVC.xib */,
 			);
 			name = VC;
+			sourceTree = "<group>";
+		};
+		45D3352D193AFB1E00D880A8 /* edog_port */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = edog_port;
+			path = RedDot/edog_port;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

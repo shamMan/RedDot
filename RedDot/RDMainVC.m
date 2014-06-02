@@ -7,7 +7,6 @@
 //
 
 #import "RDMainVC.h"
-#import "RDMapVC.h"
 
 @interface RDMainVC ()
 @end
@@ -17,6 +16,7 @@
 {
     NSString* newtext   =   [NSString stringWithFormat:@"%@\n%@",self.debugView.text,log];
     self.debugView.text =   newtext;
+    NSLog(@"%@",log);
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,6 +47,7 @@
     [_btnMap release];
     [_btnBlueT release];
     [_btnSocket release];
+    [_mapVC release];
     [super dealloc];
 }
 
@@ -60,9 +61,18 @@
     self.navigationController.navigationBarHidden =   FALSE;
 }
 
+#pragma mark - Getter & Setter
+- (RDMapVC*)mapVC
+{
+    if (!_mapVC)
+    {
+        _mapVC  =   [[RDMapVC alloc] initWithNibName:@"RDMapVC" bundle:nil];
+    }
+    return _mapVC;
+}
+
 - (IBAction)doMap:(id)sender {
-    RDMapVC* mapview    =   [[[RDMapVC alloc] initWithNibName:@"RDMapVC" bundle:nil] autorelease];
-    [self.navigationController pushViewController:mapview animated:TRUE];
+    [self.navigationController pushViewController:self.mapVC animated:TRUE];
 }
 
 - (IBAction)doBlueT:(id)sender {

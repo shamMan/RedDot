@@ -9,79 +9,9 @@
 #import "RDMapVC.h"
 #import "RDConfig.h"
 
-
-BOOL isRetina = FALSE;
-
-@interface RouteAnnotation : BMKPointAnnotation
-
-{
-    int _type; ///<0:起点 1：终点 2：公交 3：地铁 4:驾乘
-    int _degree;
-    
-}
-
-@property (nonatomic) int type;
-
-@property (nonatomic) int degree;
-
-@end
-
-@implementation RouteAnnotation
-
-@synthesize type = _type;
-
-@synthesize degree = _degree;
-
-@end
-
-@interface UIImage(InternalMethod)
-
-- (UIImage*)imageRotatedByDegrees:(CGFloat)degrees;
-
-@end
-
-@implementation UIImage(InternalMethod)
-
-- (UIImage*)imageRotatedByDegrees:(CGFloat)degrees
-
-{
-    
-    CGSize rotatedSize = self.size;
-    
-    if (isRetina) {
-        
-        rotatedSize.width *= 2;
-        
-        rotatedSize.height *= 2;
-        
-    }
-    
-    UIGraphicsBeginImageContext(rotatedSize);
-    
-    CGContextRef bitmap = UIGraphicsGetCurrentContext();
-    
-    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
-    
-    CGContextRotateCTM(bitmap, degrees * M_PI / 180);
-    
-    CGContextRotateCTM(bitmap, M_PI);
-    
-    CGContextScaleCTM(bitmap, -1.0, 1.0);
-    
-    CGContextDrawImage(bitmap, CGRectMake(-rotatedSize.width/2, -rotatedSize.height/2, rotatedSize.width, rotatedSize.height), self.CGImage);
-    
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-    
-}
-
-@end
-
 @interface RDMapVC ()
-
+// 更新画轨迹
+-(void)updateTraceLine;
 @end
 
 @implementation RDMapVC
@@ -99,11 +29,18 @@ BOOL isRetina = FALSE;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _mapView    =   [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 400)];
+    _localtions =   [[NSMutableArray alloc] init];
+    CGRect  rc  =   self.view.bounds;
+    _mapView    =   [[BMKMapView alloc] initWithFrame:rc];
+    
     self.view   =   _mapView;
     //[self.view addSubview:_mapView];
-    _mapView.centerCoordinate    =   CLLocationCoordinate2DMake(120.2,30.3);
-    //[self.mapView setShowsUserLocation:YES];//显示定位的蓝点儿
+    _mapView.centerCoordinate    =   CLLocationCoordinate2DMake(30.1784,120.1414);
+    self.mapView.showsUserLocation = YES;
+    self.mapView.userTrackingMode   =   BMKUserTrackingModeFollow;
+    _localtionService   =   [[BMKLocationService alloc] init];
+    _localtionService.delegate  =   self;
+    [_localtionService startUserLocationService];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,8 +51,12 @@ BOOL isRetina = FALSE;
 
 -(void)dealloc
 {
+    [_localtionService stopUserLocationService];
+    [_mapView release];
+    [_localtions release];
+    [_curLocation release];
+    [_localtionService release];
     [super dealloc];
-    //[_mapView release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -129,17 +70,103 @@ BOOL isRetina = FALSE;
     self.mapView.delegate    =   nil;
 }
 
-- (NSString*)getMyBundlePath1:(NSString *)filename
+-(void)updateTraceLine
 {
-    NSBundle * libBundle = MYBUNDLE ;
-    if ( libBundle && filename ){
-        
-        NSString * s=[[libBundle resourcePath ] stringByAppendingPathComponent : filename];
-        NSLog (@"%@",s);
-        return s;
+    CLLocationCoordinate2D northEastPoint;
+    CLLocationCoordinate2D southWestPoint;
+    NSUInteger count   =   self.localtions.count;
+    CLLocationCoordinate2D* pointArr = (CLLocationCoordinate2D*)malloc(sizeof(CLLocationCoordinate2D)*count);
+    for (int i=0; i<count; i++)
+    {
+        pointArr[i] =   ((CLLocation*)self.localtions[i]).coordinate;
+        if (i == 0) {
+            northEastPoint = pointArr[i];
+            southWestPoint = pointArr[i];
+        }
+        else
+        {
+            if (pointArr[i].latitude > northEastPoint.latitude)
+                northEastPoint.latitude = pointArr[i].latitude;
+            if(pointArr[i].longitude > northEastPoint.longitude)
+                northEastPoint.longitude = pointArr[i].longitude;
+            if (pointArr[i].latitude < southWestPoint.latitude)
+                southWestPoint.latitude = pointArr[i].latitude;
+            if(pointArr[i].longitude < southWestPoint.longitude)
+                southWestPoint.longitude = pointArr[i].longitude;
+        }
     }
-    return nil ;
+    if (self.polyLine) {
+        //在地图上移除已有的坐标点
+        [self.mapView removeOverlay:self.polyLine];
+    }
+    self.polyLine = [BMKPolyline polylineWithCoordinates:pointArr count:count] ;
+    // 覆盖添加到地图
+    if (nil != self.polyLine) {
+        [self.mapView addOverlay:self.polyLine];
+    }
+    // 清楚点的早些时候分配的内存
+    free(pointArr);
 }
 
-
+#pragma mark - MapViewDelegate
+- (void)mapStatusDidChanged:(BMKMapView *)mapView
+{
+    //[[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[BMKPolyline class]])
+    {
+        BMKPolylineView* polylineView = [[[BMKPolylineView alloc] initWithOverlay:overlay] autorelease];
+        polylineView.fillColor      = [[UIColor cyanColor] colorWithAlphaComponent:1];
+        polylineView.strokeColor    = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        polylineView.lineWidth = 3.0;
+        return polylineView;
+    }
+    return nil;
+}
+#pragma mark - BMKLocationServiceDelegate
+- (void)willStartLocatingUser
+{
+    [[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)didStopLocatingUser
+{
+    [[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    //[[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation
+{
+    CLLocation *location    =   userLocation.location;
+    [[Config shareInstance] PLOG:@"%s",__func__];
+    if (location)
+    {
+        [[Config shareInstance] PLOG:@"Location:[%0.4f,%0.4f-%0.4f%]",location.coordinate.latitude,location.coordinate.longitude,location.altitude];
+        // check the zero point检查零点
+        if (location.coordinate.latitude == 0.0f || location.coordinate.longitude == 0.0f)
+            return;
+        // check the move distance检查移动的距离
+        if (self.localtions.count > 0) {
+            CLLocationDistance distance = [location distanceFromLocation:_curLocation];
+            [[Config shareInstance] PLOG:@"distance From last:%0.2f",distance];
+            if (distance < 5)
+            {
+                return;
+            }
+        }
+        [self.localtions addObject:location];
+        self.curLocation = location;
+        [self updateTraceLine];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+        [self.mapView setCenterCoordinate:coordinate animated:YES];
+        [self.mapView updateLocationData:userLocation];
+    }
+}
+- (void)didFailToLocateUserWithError:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s error:%@",__func__,error];
+}
 @end

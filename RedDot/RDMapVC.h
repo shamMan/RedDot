@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 
-@interface RDMapVC : UIViewController <BMKMapViewDelegate>
+@interface RDMapVC : UIViewController <BMKMapViewDelegate,BMKLocationServiceDelegate>
 {
 }
 @property (retain, nonatomic) IBOutlet BMKMapView *mapView;
-
+// 路线采集的位置列表
+@property (retain,nonatomic) NSMutableArray*    localtions;
+// 当前位置
+@property (retain,nonatomic) CLLocation*        curLocation;
+//
+@property (retain,nonatomic) BMKPolyline*       polyLine;
+// 定位服务，如果使用外置GPS可以参照这个
+@property (retain,nonatomic) BMKLocationService*    localtionService;
 
 @end
