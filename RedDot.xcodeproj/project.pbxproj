@@ -31,6 +31,8 @@
 		04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945944193DC27000F5B03C /* RDBaseLocationService.m */; };
 		0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945946193DC27000F5B03C /* RDExternalLocationService.m */; };
 		0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945948193DC27000F5B03C /* RDinnerLocationService.m */; };
+		45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA94193DF3540057623A /* RDLocationTools.m */; };
+		45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,10 @@
 		04945946193DC27000F5B03C /* RDExternalLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDExternalLocationService.m; sourceTree = "<group>"; };
 		04945947193DC27000F5B03C /* RDInnerLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDInnerLocationService.h; sourceTree = "<group>"; };
 		04945948193DC27000F5B03C /* RDinnerLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDinnerLocationService.m; sourceTree = "<group>"; };
+		45BCAA93193DF3540057623A /* RDLocationTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLocationTools.h; sourceTree = "<group>"; };
+		45BCAA94193DF3540057623A /* RDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLocationTools.m; sourceTree = "<group>"; };
+		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
+		45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKUserLocationEx.m; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +198,7 @@
 		047049211936C4EE00182A69 /* RedDot */ = {
 			isa = PBXGroup;
 			children = (
+				45BCAA96193DFBA20057623A /* category */,
 				0494593F193DA48400F5B03C /* common */,
 				0470497E1936DA8A00182A69 /* RDConfig.h */,
 				0470497F1936DA8A00182A69 /* RDConfig.mm */,
@@ -316,6 +323,8 @@
 		0494593F193DA48400F5B03C /* common */ = {
 			isa = PBXGroup;
 			children = (
+				45BCAA93193DF3540057623A /* RDLocationTools.h */,
+				45BCAA94193DF3540057623A /* RDLocationTools.m */,
 				04945943193DC27000F5B03C /* RDBaseLocationService.h */,
 				04945944193DC27000F5B03C /* RDBaseLocationService.m */,
 				04945945193DC27000F5B03C /* RDExternalLocationService.h */,
@@ -324,6 +333,15 @@
 				04945948193DC27000F5B03C /* RDinnerLocationService.m */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		45BCAA96193DFBA20057623A /* category */ = {
+			isa = PBXGroup;
+			children = (
+				45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */,
+				45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */,
+			);
+			path = category;
 			sourceTree = "<group>";
 		};
 		45D3352D193AFB1E00D880A8 /* edog_port */ = {
@@ -407,7 +425,9 @@
 				0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */,
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
+				45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
+				45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */,
 				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
 				0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */,
 				0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */,

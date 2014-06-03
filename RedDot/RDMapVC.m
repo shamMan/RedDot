@@ -8,6 +8,9 @@
 
 #import "RDMapVC.h"
 #import "RDConfig.h"
+#import "RDInnerLocationService.h"
+#import "RDLocationTools.h"
+#import "BMKUserLocationEx.h"
 
 @interface RDMapVC ()
 // 更新画轨迹
@@ -38,9 +41,9 @@
     _mapView.centerCoordinate    =   CLLocationCoordinate2DMake(30.1784,120.1414);
     self.mapView.showsUserLocation = YES;
     self.mapView.userTrackingMode   =   BMKUserTrackingModeFollow;
-    _localtionService   =   [[BMKLocationService alloc] init];
+    _localtionService   =   [[RDInnerLocationService alloc] init];
     _localtionService.delegate  =   self;
-    [_localtionService startUserLocationService];
+    [_localtionService startLocationService];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +54,7 @@
 
 -(void)dealloc
 {
-    [_localtionService stopUserLocationService];
+    [_localtionService stopLocationService];
     [_mapView release];
     [_localtions release];
     [_curLocation release];
@@ -125,25 +128,32 @@
     }
     return nil;
 }
-#pragma mark - BMKLocationServiceDelegate
-- (void)willStartLocatingUser
+#pragma mark - RDLocationServiceDelegate
+- (void)serviceWillStartLocating:(id)service
 {
     [[Config shareInstance] PLOG:@"%s",__func__];
 }
-- (void)didStopLocatingUser
+- (void)serviceDidStopLocating:(id)service
 {
     [[Config shareInstance] PLOG:@"%s",__func__];
 }
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+- (void)service:(id)service didUpdateHeading:(CLHeading *)newHeading
 {
     //[[Config shareInstance] PLOG:@"%s",__func__];
 }
-- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation
+- (void)service:(id)service didUpdateLocation:(CLLocation *)newLocation
 {
-    CLLocation *location    =   userLocation.location;
-    [[Config shareInstance] PLOG:@"%s",__func__];
-    if (location)
+    //[[Config shareInstance] PLOG:@"%s",__func__];
+    if (newLocation)
     {
+        BMKUserLocationEx* userLocation   =   [[BMKUserLocationEx  alloc] init];
+        // 转换 GPS 到 百度坐标
+        CLLocation* bLocation   =   [RDLocationTools CLLocationApplyBaiDuTransform:newLocation];
+        [userLocation SetCLLocation:bLocation];
+        [userLocation SetCLHeading:((RDBaseLocationService*)service).curHeading];
+        CLLocation *location    =   userLocation.location;
+        
+        
         [[Config shareInstance] PLOG:@"Location:[%0.4f,%0.4f-%0.4f%]",location.coordinate.latitude,location.coordinate.longitude,location.altitude];
         // check the zero point检查零点
         if (location.coordinate.latitude == 0.0f || location.coordinate.longitude == 0.0f)
@@ -163,6 +173,7 @@
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
         [self.mapView setCenterCoordinate:coordinate animated:YES];
         [self.mapView updateLocationData:userLocation];
+        [userLocation release];
     }
 }
 - (void)didFailToLocateUserWithError:(NSError *)error
