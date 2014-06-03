@@ -28,6 +28,9 @@
 		0470498F1937124300182A69 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470498E1937124300182A69 /* SystemConfiguration.framework */; };
 		047049911937127200182A69 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047049901937127100182A69 /* Security.framework */; };
 		047049931938523500182A69 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047049921938523500182A69 /* mapapi.bundle */; };
+		04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945944193DC27000F5B03C /* RDBaseLocationService.m */; };
+		0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945946193DC27000F5B03C /* RDExternalLocationService.m */; };
+		0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945948193DC27000F5B03C /* RDinnerLocationService.m */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +122,12 @@
 		0470498E1937124300182A69 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		047049901937127100182A69 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		047049921938523500182A69 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Res/mapapi.bundle; sourceTree = "<group>"; };
+		04945943193DC27000F5B03C /* RDBaseLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBaseLocationService.h; sourceTree = "<group>"; };
+		04945944193DC27000F5B03C /* RDBaseLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDBaseLocationService.m; sourceTree = "<group>"; };
+		04945945193DC27000F5B03C /* RDExternalLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDExternalLocationService.h; sourceTree = "<group>"; };
+		04945946193DC27000F5B03C /* RDExternalLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDExternalLocationService.m; sourceTree = "<group>"; };
+		04945947193DC27000F5B03C /* RDInnerLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDInnerLocationService.h; sourceTree = "<group>"; };
+		04945948193DC27000F5B03C /* RDinnerLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDinnerLocationService.m; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +192,7 @@
 		047049211936C4EE00182A69 /* RedDot */ = {
 			isa = PBXGroup;
 			children = (
+				0494593F193DA48400F5B03C /* common */,
 				0470497E1936DA8A00182A69 /* RDConfig.h */,
 				0470497F1936DA8A00182A69 /* RDConfig.mm */,
 				0470497D1936C84F00182A69 /* VC */,
@@ -303,6 +313,19 @@
 			name = VC;
 			sourceTree = "<group>";
 		};
+		0494593F193DA48400F5B03C /* common */ = {
+			isa = PBXGroup;
+			children = (
+				04945943193DC27000F5B03C /* RDBaseLocationService.h */,
+				04945944193DC27000F5B03C /* RDBaseLocationService.m */,
+				04945945193DC27000F5B03C /* RDExternalLocationService.h */,
+				04945946193DC27000F5B03C /* RDExternalLocationService.m */,
+				04945947193DC27000F5B03C /* RDInnerLocationService.h */,
+				04945948193DC27000F5B03C /* RDinnerLocationService.m */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
 		45D3352D193AFB1E00D880A8 /* edog_port */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +408,9 @@
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
+				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
+				0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */,
+				0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

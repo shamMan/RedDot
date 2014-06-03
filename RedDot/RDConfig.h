@@ -16,6 +16,8 @@
 
 // appsotre 发布版
 //#define APPSTORE_RELEASE
+// 是否使用 CLCoreLocation
+#define USE_CORELOCATION
 
 // 经纬度是否有效
 #define validateLocation(longitude,latitude)  (longitude >= -180 && longitude <= 180 && latitude >= -90 && latitude <= 90)
