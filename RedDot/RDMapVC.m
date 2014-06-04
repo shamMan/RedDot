@@ -43,7 +43,6 @@
     self.mapView.userTrackingMode   =   BMKUserTrackingModeFollow;
     _localtionService   =   [[RDInnerLocationService alloc] init];
     _localtionService.delegate  =   self;
-    [_localtionService startLocationService];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,11 +65,13 @@
 {
     [self.mapView viewWillAppear];
     self.mapView.delegate    =   self;
+    [_localtionService startLocationService];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.mapView viewWillDisappear];
     self.mapView.delegate    =   nil;
+    [_localtionService stopLocationService];
 }
 
 -(void)updateTraceLine
