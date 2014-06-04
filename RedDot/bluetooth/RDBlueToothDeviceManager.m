@@ -7,6 +7,7 @@
 //
 
 #import "RDBlueToothDeviceManager.h"
+#import "RDConfig.h"
 
 @interface RDBlueToothDeviceManager()<CBCentralManagerDelegate>
 {
@@ -33,4 +34,53 @@
     [_connectedServices release];
     [super dealloc];
 }
+#pragma mark - CBCentralManagerDelegate
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    NSString* strStatus[]   =   {
+        @"CBCentralManagerStateUnknown",
+        @"CBCentralManagerStateResetting",
+        @"CBCentralManagerStateUnsupported",
+        @"CBCentralManagerStateUnauthorized",
+        @"CBCentralManagerStatePoweredOff",
+        @"CBCentralManagerStatePoweredOn"
+    };
+    [[Config shareInstance] PLOG:@"centralManagerDidUpdateState:%@",__func__,strStatus[central.state]];
+}
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,dict];
+}
+
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,peripherals];
+}
+
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,peripherals];
+}
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    [[Config shareInstance] PLOG:@"%s %@ %@ %@",__func__,peripheral,advertisementData,RSSI];
+}
+
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,peripheral];
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+
 @end

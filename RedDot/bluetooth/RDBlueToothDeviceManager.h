@@ -9,10 +9,27 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+@class RDBlueToothDeviceManager;
+
+typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
+    BLDeviceManagerStatusPowerOff,
+    BLDeviceManagerStatusPowerOn,
+    BLDeviceManagerStatusInit,
+    BLDeviceManagerStatusScanning,
+    BLDeviceManagerStatusDiscovered,
+    BLDeviceManagerStatusConnected,
+    BLDeviceManagerStatusDisconnected,
+    BLDeviceManagerStatusError
+};
+
+@protocol RDBuleToothDeviceDelegate <NSObject>
+@optional
+-(void)Manager:(RDBlueToothDeviceManager*) manager didChangeStatus:(BLDeviceManagerStatus) status;
+@end
+
 @interface RDBlueToothDeviceManager : NSObject
-/****************************************************************************/
-/*							Access to the devices							*/
-/****************************************************************************/
+@property (assign,nonatomic) id<RDBuleToothDeviceDelegate>  delegate;
 @property (retain, nonatomic) NSMutableArray    *foundPeripherals;
-@property (retain, nonatomic) NSMutableArray	*connectedServices;	// Array of LeTemperatureAlarmService
+@property (retain, nonatomic) NSMutableArray	*connectedServices;
+-(BOOL)startScan;
 @end
