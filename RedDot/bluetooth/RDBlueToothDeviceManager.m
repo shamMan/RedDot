@@ -12,6 +12,7 @@
 @interface RDBlueToothDeviceManager()<CBCentralManagerDelegate>
 {
     CBCentralManager*   _centralManager;
+    CBPeripheral*       _peripheral;
 }
 @end
 
@@ -33,6 +34,31 @@
     [_foundPeripherals release];
     [_connectedServices release];
     [super dealloc];
+}
+-(BOOL)StartIntelligentConnect
+{
+    if (_centralManager) {
+        [_centralManager scanForPeripheralsWithServices:nil options:nil];
+    }
+    return TRUE;
+}
+-(BOOL)StopConnect
+{
+    if (_centralManager)
+    {
+        [_centralManager stopScan];
+        if (_peripheral) {
+            [_centralManager cancelPeripheralConnection:_peripheral];
+            [_peripheral release];
+            _peripheral =  nil;
+        }
+        switch (_status) {
+                
+            default:
+                break;
+        }
+    }
+    return TRUE;
 }
 #pragma mark - CBCentralManagerDelegate
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central

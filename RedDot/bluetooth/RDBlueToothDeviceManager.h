@@ -14,6 +14,8 @@
 typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
     BLDeviceManagerStatusPowerOff,
     BLDeviceManagerStatusPowerOn,
+    BLDeviceManagerStatusResetting,
+    BLDeviceManagerStatusUnauthorized,
     BLDeviceManagerStatusInit,
     BLDeviceManagerStatusScanning,
     BLDeviceManagerStatusDiscovered,
@@ -24,12 +26,14 @@ typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
 
 @protocol RDBuleToothDeviceDelegate <NSObject>
 @optional
--(void)Manager:(RDBlueToothDeviceManager*) manager didChangeStatus:(BLDeviceManagerStatus) status;
+-(void)Manager:(RDBlueToothDeviceManager*) manager statusChanged:(BLDeviceManagerStatus) status;
 @end
 
 @interface RDBlueToothDeviceManager : NSObject
 @property (assign,nonatomic) id<RDBuleToothDeviceDelegate>  delegate;
 @property (retain, nonatomic) NSMutableArray    *foundPeripherals;
 @property (retain, nonatomic) NSMutableArray	*connectedServices;
--(BOOL)startScan;
+@property (readonly,nonatomic) BLDeviceManagerStatus   status;
+-(BOOL)StartIntelligentConnect;
+-(BOOL)StopConnect;
 @end
