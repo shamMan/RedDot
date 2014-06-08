@@ -33,9 +33,11 @@
 		0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945948193DC27000F5B03C /* RDinnerLocationService.m */; };
 		04945950193EF3B800F5B03C /* RDBlueToothDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494594F193EF3B800F5B03C /* RDBlueToothDeviceManager.m */; };
 		04945952193EF41600F5B03C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04945951193EF41600F5B03C /* CoreBluetooth.framework */; };
+		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
 		45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA94193DF3540057623A /* RDLocationTools.m */; };
 		45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
+		8152ABA649544C27846A0F1C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8586B2CDE08344EA86BC8F0E /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,11 +137,15 @@
 		0494594E193EF3B800F5B03C /* RDBlueToothDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBlueToothDeviceManager.h; sourceTree = "<group>"; };
 		0494594F193EF3B800F5B03C /* RDBlueToothDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDBlueToothDeviceManager.m; sourceTree = "<group>"; };
 		04945951193EF41600F5B03C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		451EF9EC19444BC3000689B3 /* RDNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNetwork.m; sourceTree = "<group>"; };
+		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
 		45BCAA93193DF3540057623A /* RDLocationTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLocationTools.h; sourceTree = "<group>"; };
 		45BCAA94193DF3540057623A /* RDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLocationTools.m; sourceTree = "<group>"; };
 		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
 		45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKUserLocationEx.m; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
+		8586B2CDE08344EA86BC8F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ACC6029ADB74FB684844810 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 				0470491E1936C4EE00182A69 /* Foundation.framework in Frameworks */,
 				047049201936C4EE00182A69 /* CoreGraphics.framework in Frameworks */,
 				45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */,
+				8152ABA649544C27846A0F1C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +181,7 @@
 				047049211936C4EE00182A69 /* RedDot */,
 				0470491A1936C4EE00182A69 /* Frameworks */,
 				047049191936C4EE00182A69 /* Products */,
+				9ACC6029ADB74FB684844810 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,6 +206,7 @@
 				0470491B1936C4EE00182A69 /* UIKit.framework */,
 				0470491D1936C4EE00182A69 /* Foundation.framework */,
 				0470491F1936C4EE00182A69 /* CoreGraphics.framework */,
+				8586B2CDE08344EA86BC8F0E /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -356,6 +365,8 @@
 		0494594D193EAF3E00F5B03C /* network */ = {
 			isa = PBXGroup;
 			children = (
+				451EF9EC19444BC3000689B3 /* RDNetwork.m */,
+				451EF9ED19444BC3000689B3 /* RDNetwork.h */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -384,9 +395,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 047049351936C4EE00182A69 /* Build configuration list for PBXNativeTarget "RedDot" */;
 			buildPhases = (
+				09983E85D3254997A44A8A1B /* Check Pods Manifest.lock */,
 				047049141936C4EE00182A69 /* Sources */,
 				047049151936C4EE00182A69 /* Frameworks */,
 				047049161936C4EE00182A69 /* Resources */,
+				2C0046448AC24B4DB4306213 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -441,6 +454,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09983E85D3254997A44A8A1B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2C0046448AC24B4DB4306213 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		047049141936C4EE00182A69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -452,6 +498,7 @@
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
 				45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
+				451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */,
 				45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */,
 				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
 				0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */,
@@ -530,6 +577,7 @@
 		};
 		047049361936C4EE00182A69 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
@@ -547,6 +595,7 @@
 		};
 		047049371936C4EE00182A69 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
