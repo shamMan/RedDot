@@ -7,6 +7,7 @@
 //
 
 #import "RDMainVC.h"
+#import "RDNetwork.h"
 
 @interface RDMainVC ()
 @end
@@ -79,5 +80,7 @@
 }
 
 - (IBAction)doSocket:(id)sender {
+    RDNetwork* network  =   [RDNetwork ShareInstance];
+    [network connectToServer];
 }
 @end

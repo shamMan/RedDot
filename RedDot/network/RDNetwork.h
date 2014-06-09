@@ -9,10 +9,9 @@
 #import <CFNetwork/CFSocketStream.h>
 
 @interface RDNetwork : NSObject
-{
-    
-}
 
--(BOOL)ConnectToServer;
++(RDNetwork*)ShareInstance;
+
+-(BOOL)connectToServer;
 
 @end
