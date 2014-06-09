@@ -20,6 +20,7 @@
     dispatch_once(&predicate, ^{
         sharedConfigInstance = [[self alloc] init];
     });
+    
     return sharedConfigInstance;
 }
 

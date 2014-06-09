@@ -11,8 +11,11 @@ typedef unsigned int    UINT32;
 typedef int             INT32;
 
 typedef UINT16 kal_uint16;
+typedef UINT8 kal_uint8;
+typedef UINT8 socket_type_enum;
+typedef UINT8 U8;
 
-//#define __align(X) __declspec(__align(X))
+#define __align(X) __declspec(align(X))
 
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."

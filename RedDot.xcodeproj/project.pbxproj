@@ -34,6 +34,7 @@
 		04945950193EF3B800F5B03C /* RDBlueToothDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494594F193EF3B800F5B03C /* RDBlueToothDeviceManager.m */; };
 		04945952193EF41600F5B03C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04945951193EF41600F5B03C /* CoreBluetooth.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
+		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
 		45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA94193DF3540057623A /* RDLocationTools.m */; };
 		45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
@@ -139,6 +140,8 @@
 		04945951193EF41600F5B03C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		451EF9EC19444BC3000689B3 /* RDNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNetwork.m; sourceTree = "<group>"; };
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
+		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
+		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
 		45BCAA93193DF3540057623A /* RDLocationTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLocationTools.h; sourceTree = "<group>"; };
 		45BCAA94193DF3540057623A /* RDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLocationTools.m; sourceTree = "<group>"; };
 		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 		0494594D193EAF3E00F5B03C /* network */ = {
 			isa = PBXGroup;
 			children = (
+				458B5E5A1945F46300F8BCEA /* gprsProc.c */,
+				458B5E5B1945F46300F8BCEA /* gprsProc.h */,
 				451EF9EC19444BC3000689B3 /* RDNetwork.m */,
 				451EF9ED19444BC3000689B3 /* RDNetwork.h */,
 			);
@@ -493,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				047049281936C4EE00182A69 /* main.m in Sources */,
+				458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */,
 				0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */,
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
