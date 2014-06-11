@@ -146,6 +146,7 @@
 		45BCAA94193DF3540057623A /* RDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLocationTools.m; sourceTree = "<group>"; };
 		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
 		45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKUserLocationEx.m; sourceTree = "<group>"; };
+		45C9C322194886C80006D520 /* undef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = undef.h; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 		8586B2CDE08344EA86BC8F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACC6029ADB74FB684844810 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -368,6 +369,7 @@
 		0494594D193EAF3E00F5B03C /* network */ = {
 			isa = PBXGroup;
 			children = (
+				45C9C322194886C80006D520 /* undef.h */,
 				458B5E5A1945F46300F8BCEA /* gprsProc.c */,
 				458B5E5B1945F46300F8BCEA /* gprsProc.h */,
 				451EF9EC19444BC3000689B3 /* RDNetwork.m */,

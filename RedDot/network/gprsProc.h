@@ -7,6 +7,7 @@
 @copyright (C)版权所有，深圳市兆图电子有限公司，保留所有权利
 */
 
+#include "undef.h"
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -257,6 +258,7 @@ typedef struct{
 	UINT16	nPackSize;		///<升级数据包大小，实际字节数；
 	UINT32	dwBytes;		///<待传输的数据大小；
 }STU_POIUPDATE_CHK_ACK;
+    
 ///< 一个结构体,处理POI私有数据的升级查询
 extern __align(4) STU_POI_UPDATE_REQ stu_PoiUpdateReq;
 extern STU_ROAD_PARAM stu_RoadParam;
