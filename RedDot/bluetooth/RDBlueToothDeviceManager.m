@@ -8,15 +8,29 @@
 
 #import "RDBlueToothDeviceManager.h"
 #import "RDConfig.h"
+#import <CoreBluetooth/CBCharacteristic.h>
 
-@interface RDBlueToothDeviceManager()<CBCentralManagerDelegate>
+@interface RDBlueToothDeviceManager()<CBCentralManagerDelegate,CBPeripheralDelegate>
 {
-    CBCentralManager*   _centralManager;
-    CBPeripheral*       _peripheral;
+//    CBCentralManager*   _centralManager;
+//    CBPeripheral*       _peripheral;
 }
+@property (retain,nonatomic)CBPeripheral* peripheral;
+@property (retain,nonatomic)CBCentralManager* centralManager;
 @end
 
 @implementation RDBlueToothDeviceManager
++(RDBlueToothDeviceManager*)shareInstance
+{
+    static RDBlueToothDeviceManager *sharedConfigInstance = nil;
+    
+    static dispatch_once_t predicate__;
+    dispatch_once(&predicate__, ^{
+        sharedConfigInstance = [[self alloc] init];
+    });
+    
+    return sharedConfigInstance;
+}
 -(id)init
 {
     self =  [super init];
@@ -71,7 +85,8 @@
         @"CBCentralManagerStatePoweredOff",
         @"CBCentralManagerStatePoweredOn"
     };
-    [[Config shareInstance] PLOG:@"centralManagerDidUpdateState:%@",__func__,strStatus[central.state]];
+    [[Config shareInstance] PLOG:@"centralManagerDidUpdateState:%s %@",__func__,strStatus[central.state]];
+    [self.delegate Manager:self statusChanged:(BLDeviceManagerStatus)central.state];
 }
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
@@ -92,12 +107,17 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [[Config shareInstance] PLOG:@"%s %@ %@ %@",__func__,peripheral,advertisementData,RSSI];
-    
+    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusDiscovered];
+    [_centralManager connectPeripheral:peripheral options:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    self.peripheral =   peripheral;
+    self.peripheral.delegate    =   self;
     [[Config shareInstance] PLOG:@"%s %@",__func__,peripheral];
+    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusConnected];
+    [self.peripheral discoverServices:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -108,6 +128,79 @@
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusDisconnected];
 }
-
+#pragma mark --
+- (void)peripheralDidUpdateName:(CBPeripheral *)peripheral
+{
+    [[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral
+{
+    [[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
+{
+    [[Config shareInstance] PLOG:@"%s",__func__];
+}
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    NSArray		*services	= nil;
+	   
+    if (error != nil) {
+        NSLog(@"Error %@\n", error);
+		return ;
+	}
+    
+	services = [peripheral services];
+	if (!services || ![services count]) {
+		return ;
+	}
+    
+	for (CBService *service in services) {
+		[[Config shareInstance] PLOG:@"%@ isPrimary:%d \t{",service.UUID,service.isPrimary];
+        for (CBCharacteristic* charac in service.characteristics)
+        {
+            NSLog(@"%@",charac);
+        }
+        [[Config shareInstance] PLOG:@"\t}"];
+    }
+}
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+{
+    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
 @end

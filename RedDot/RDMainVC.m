@@ -8,6 +8,7 @@
 
 #import "RDMainVC.h"
 #import "RDNetwork.h"
+#import "RDBlueToothDeviceManager.h"
 
 @interface RDMainVC ()
 @end
@@ -77,6 +78,7 @@
 }
 
 - (IBAction)doBlueT:(id)sender {
+    [[RDBlueToothDeviceManager shareInstance] StartIntelligentConnect];
 }
 
 - (IBAction)doSocket:(id)sender {

@@ -5,6 +5,12 @@
 #import <Availability.h>
 
 
+typedef unsigned char   UINT8;
+typedef unsigned short  UINT16;
+typedef short           INT16;
+typedef unsigned int    UINT32;
+typedef int             INT32;
+
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."
 #endif

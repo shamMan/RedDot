@@ -35,6 +35,14 @@
 		04945952193EF41600F5B03C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04945951193EF41600F5B03C /* CoreBluetooth.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
+		45B8461B194F20EC00909937 /* IncUpdater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84609194F20EC00909937 /* IncUpdater.cpp */; };
+		45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460C194F20EC00909937 /* AutoLock.cpp */; };
+		45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460E194F20EC00909937 /* DataStruct.cpp */; };
+		45B8461E194F20EC00909937 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84610194F20EC00909937 /* Event.cpp */; };
+		45B8461F194F20EC00909937 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84612194F20EC00909937 /* Socket.cpp */; };
+		45B84620194F20EC00909937 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84615194F20EC00909937 /* thread.cpp */; };
+		45B84621194F20EC00909937 /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84617194F20EC00909937 /* Trace.cpp */; };
+		45B84622194F20EC00909937 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84619194F20EC00909937 /* Utils.cpp */; };
 		45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA94193DF3540057623A /* RDLocationTools.m */; };
 		45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
@@ -142,6 +150,24 @@
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
+		45B84608194F20EC00909937 /* IncUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncUpdate.h; sourceTree = "<group>"; };
+		45B84609194F20EC00909937 /* IncUpdater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IncUpdater.cpp; sourceTree = "<group>"; };
+		45B8460A194F20EC00909937 /* IncUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncUpdater.h; sourceTree = "<group>"; };
+		45B8460C194F20EC00909937 /* AutoLock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoLock.cpp; sourceTree = "<group>"; };
+		45B8460D194F20EC00909937 /* AutoLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLock.h; sourceTree = "<group>"; };
+		45B8460E194F20EC00909937 /* DataStruct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStruct.cpp; sourceTree = "<group>"; };
+		45B8460F194F20EC00909937 /* DataStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStruct.h; sourceTree = "<group>"; };
+		45B84610194F20EC00909937 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
+		45B84611194F20EC00909937 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		45B84612194F20EC00909937 /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
+		45B84613194F20EC00909937 /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
+		45B84614194F20EC00909937 /* stdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
+		45B84615194F20EC00909937 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread.cpp; sourceTree = "<group>"; };
+		45B84616194F20EC00909937 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		45B84617194F20EC00909937 /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trace.cpp; sourceTree = "<group>"; };
+		45B84618194F20EC00909937 /* Trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
+		45B84619194F20EC00909937 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		45B8461A194F20EC00909937 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		45BCAA93193DF3540057623A /* RDLocationTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLocationTools.h; sourceTree = "<group>"; };
 		45BCAA94193DF3540057623A /* RDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLocationTools.m; sourceTree = "<group>"; };
 		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
@@ -218,6 +244,7 @@
 		047049211936C4EE00182A69 /* RedDot */ = {
 			isa = PBXGroup;
 			children = (
+				45B84607194F20EC00909937 /* RDDemoUpdater */,
 				0494594C193EAF3E00F5B03C /* bluetooth */,
 				0494594D193EAF3E00F5B03C /* network */,
 				45BCAA96193DFBA20057623A /* category */,
@@ -378,6 +405,39 @@
 			path = network;
 			sourceTree = "<group>";
 		};
+		45B84607194F20EC00909937 /* RDDemoUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				45B84608194F20EC00909937 /* IncUpdate.h */,
+				45B84609194F20EC00909937 /* IncUpdater.cpp */,
+				45B8460A194F20EC00909937 /* IncUpdater.h */,
+				45B8460B194F20EC00909937 /* Utilities */,
+			);
+			path = RDDemoUpdater;
+			sourceTree = "<group>";
+		};
+		45B8460B194F20EC00909937 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				45B8460C194F20EC00909937 /* AutoLock.cpp */,
+				45B8460D194F20EC00909937 /* AutoLock.h */,
+				45B8460E194F20EC00909937 /* DataStruct.cpp */,
+				45B8460F194F20EC00909937 /* DataStruct.h */,
+				45B84610194F20EC00909937 /* Event.cpp */,
+				45B84611194F20EC00909937 /* Event.h */,
+				45B84612194F20EC00909937 /* Socket.cpp */,
+				45B84613194F20EC00909937 /* Socket.h */,
+				45B84614194F20EC00909937 /* stdint.h */,
+				45B84615194F20EC00909937 /* thread.cpp */,
+				45B84616194F20EC00909937 /* Thread.h */,
+				45B84617194F20EC00909937 /* Trace.cpp */,
+				45B84618194F20EC00909937 /* Trace.h */,
+				45B84619194F20EC00909937 /* Utils.cpp */,
+				45B8461A194F20EC00909937 /* Utils.h */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		45BCAA96193DFBA20057623A /* category */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,9 +568,17 @@
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
 				451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */,
 				45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */,
+				45B84621194F20EC00909937 /* Trace.cpp in Sources */,
 				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
 				0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */,
+				45B8461E194F20EC00909937 /* Event.cpp in Sources */,
 				0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */,
+				45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */,
+				45B8461B194F20EC00909937 /* IncUpdater.cpp in Sources */,
+				45B84622194F20EC00909937 /* Utils.cpp in Sources */,
+				45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */,
+				45B84620194F20EC00909937 /* thread.cpp in Sources */,
+				45B8461F194F20EC00909937 /* Socket.cpp in Sources */,
 				04945950193EF3B800F5B03C /* RDBlueToothDeviceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

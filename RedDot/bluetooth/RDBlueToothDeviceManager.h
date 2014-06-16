@@ -12,10 +12,12 @@
 @class RDBlueToothDeviceManager;
 
 typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
+    BLDeviceManagerStateUnknown,
+    BLDeviceManagerStatusResetting,
+    BLDeviceManagerStateUnsupported,
+    BLDeviceManagerStatusUnauthorized,
     BLDeviceManagerStatusPowerOff,
     BLDeviceManagerStatusPowerOn,
-    BLDeviceManagerStatusResetting,
-    BLDeviceManagerStatusUnauthorized,
     BLDeviceManagerStatusInit,
     BLDeviceManagerStatusScanning,
     BLDeviceManagerStatusDiscovered,
@@ -34,6 +36,7 @@ typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
 @property (retain, nonatomic) NSMutableArray    *foundPeripherals;
 @property (retain, nonatomic) NSMutableArray	*connectedServices;
 @property (readonly,nonatomic) BLDeviceManagerStatus   status;
++(RDBlueToothDeviceManager*)shareInstance;
 -(BOOL)StartIntelligentConnect;
 -(BOOL)StopConnect;
 @end
