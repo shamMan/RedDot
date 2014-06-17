@@ -19,25 +19,43 @@ typedef NS_ENUM(NSUInteger,MagicDogKeyType)
     MagicDogKeyTypeMute
 };
 
-@protocol RDMagicDogLocationDelegate <NSObject>
+typedef NS_ENUM(NSUInteger, DogStatus) {
+    DogStatusConnected,
+    DogStatusDisconnected,
+    DogStatusStatusError
+};
+
+@class RDMagicDog;
+
+@protocol DogDelegate <NSObject>
 @optional
-- (void)dog:(id)dog didUpdateHeading:(CLHeading *)newHeading;
-- (void)dog:(id)dog didUpdateLocation:(CLLocation *)newLocation;
+// Status
+- (void)dog:(RDMagicDog*)dog statusChanged:(DogStatus) status;
+// Location
+- (void)dog:(RDMagicDog*)dog didUpdateHeading:(CLHeading *)newHeading;
+- (void)dog:(RDMagicDog*)dog didUpdateLocation:(CLLocation *)newLocation;
 @end
 
-
 @interface RDMagicDog : NSObject
-@property (assign,nonatomic) id<RDMagicDogLocationDelegate> location_delegate;
+@property (assign,nonatomic) id<DogDelegate>    delegate;
 @property (retain,nonatomic) CBCentralManager*  centralManager;
 @property (retain,nonatomic) CBPeripheral*      peripheral;
+@property (assign,nonatomic) DogStatus          status;
 
++(RDMagicDog*)linkDogWithDelegate:(id<DogDelegate>)delegate;
+// 升级
+-(BOOL)updateMap;
 // 定位
--(BOOL)startLocationWithDelegate:(id)delegate;
+-(BOOL)openNMEAEN;
+// 定位
+-(BOOL)closeNMEAEN;
 // 路况
 -(BOOL)startScanRoadInfo;
 // 按键
 -(BOOL)SendVirtualKey:(MagicDogKeyType)key;
 // 投诉
 -(BOOL)POI;
+// 播放TTS
+-(BOOL)playTTS;
 
 @end
