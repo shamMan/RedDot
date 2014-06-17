@@ -36,17 +36,13 @@
     self =  [super init];
     if (self) {
 		_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
-        
-		_foundPeripherals = [[NSMutableArray alloc] init];
-		_connectedServices = [[NSMutableArray alloc] init];
 	}
     return self;
 }
 -(void)dealloc
 {
     [_centralManager release];
-    [_foundPeripherals release];
-    [_connectedServices release];
+    [_peripheral release];
     [super dealloc];
 }
 -(BOOL)StartIntelligentConnect
@@ -107,6 +103,7 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [[Config shareInstance] PLOG:@"%s %@ %@ %@",__func__,peripheral,advertisementData,RSSI];
+    [_centralManager stopScan];
     [self.delegate Manager:self statusChanged:BLDeviceManagerStatusDiscovered];
     [_centralManager connectPeripheral:peripheral options:nil];
 }
@@ -163,11 +160,8 @@
 	}
     
 	for (CBService *service in services) {
-		[[Config shareInstance] PLOG:@"%@ isPrimary:%d \t{",service.UUID,service.isPrimary];
-        for (CBCharacteristic* charac in service.characteristics)
-        {
-            NSLog(@"%@",charac);
-        }
+		[[Config shareInstance] PLOG:@"Service found: %@ isPrimary:%d \t{",service.UUID,service.isPrimary];
+        [_peripheral discoverCharacteristics:nil forService:service];
         [[Config shareInstance] PLOG:@"\t}"];
     }
 }
@@ -178,6 +172,11 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    for(CBCharacteristic*characteristic in service.characteristics)
+    {
+        [[Config shareInstance] PLOG:@"charac:%@",characteristic];
+        [_peripheral setNotifyValue:YES forCharacteristic:characteristic];
+    }
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {

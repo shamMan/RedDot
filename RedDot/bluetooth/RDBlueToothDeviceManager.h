@@ -33,8 +33,6 @@ typedef NS_ENUM(NSUInteger, BLDeviceManagerStatus) {
 
 @interface RDBlueToothDeviceManager : NSObject
 @property (assign,nonatomic) id<RDBuleToothDeviceDelegate>  delegate;
-@property (retain, nonatomic) NSMutableArray    *foundPeripherals;
-@property (retain, nonatomic) NSMutableArray	*connectedServices;
 @property (readonly,nonatomic) BLDeviceManagerStatus   status;
 +(RDBlueToothDeviceManager*)shareInstance;
 -(BOOL)StartIntelligentConnect;

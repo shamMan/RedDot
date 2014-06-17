@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040C771419503F8A00D2A256 /* RDMagicDog.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C771319503F8900D2A256 /* RDMagicDog.m */; };
 		0470491C1936C4EE00182A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470491B1936C4EE00182A69 /* UIKit.framework */; };
 		0470491E1936C4EE00182A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470491D1936C4EE00182A69 /* Foundation.framework */; };
 		047049201936C4EE00182A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0470491F1936C4EE00182A69 /* CoreGraphics.framework */; };
@@ -50,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040C771219503F8900D2A256 /* RDMagicDog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDMagicDog.h; sourceTree = "<group>"; };
+		040C771319503F8900D2A256 /* RDMagicDog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDMagicDog.m; sourceTree = "<group>"; };
 		047049181936C4EE00182A69 /* RedDot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedDot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0470491B1936C4EE00182A69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0470491D1936C4EE00182A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -255,6 +258,8 @@
 				0470492A1936C4EE00182A69 /* RDAppDelegate.h */,
 				0470492B1936C4EE00182A69 /* RDAppDelegate.mm */,
 				047049221936C4EE00182A69 /* Supporting Files */,
+				040C771219503F8900D2A256 /* RDMagicDog.h */,
+				040C771319503F8900D2A256 /* RDMagicDog.m */,
 			);
 			path = RedDot;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				45B84620194F20EC00909937 /* thread.cpp in Sources */,
 				45B8461F194F20EC00909937 /* Socket.cpp in Sources */,
 				04945950193EF3B800F5B03C /* RDBlueToothDeviceManager.m in Sources */,
+				040C771419503F8A00D2A256 /* RDMagicDog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

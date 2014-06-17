@@ -205,9 +205,21 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         
         SVProgressHUDBackgroundColor = [UIColor whiteColor];
         SVProgressHUDForegroundColor = [UIColor blackColor];
-        SVProgressHUDFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-        SVProgressHUDSuccessImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        SVProgressHUDErrorImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/error"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            // iOS 7 code
+            #if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
+            [SVProgressHUDFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+             SVProgressHUDSuccessImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+             SVProgressHUDErrorImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/error"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            #endif
+        }
+        else {
+            // iOS 6.x code
+             SVProgressHUDFont = [UIFont systemFontOfSize:17];
+             SVProgressHUDSuccessImage = [UIImage imageNamed:@"SVProgressHUD.bundle/success"];
+             SVProgressHUDErrorImage = [UIImage imageNamed:@"SVProgressHUD.bundle/error"];
+        }
         SVProgressHUDRingThickness = 4;
     }
 	
@@ -261,13 +273,24 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
     NSString *string = self.stringLabel.text;
     // False if it's text-only
     BOOL imageUsed = (self.imageView.image) || (self.imageView.hidden);
-    
     if(string) {
         CGSize constraintSize = CGSizeMake(200, 300);
-        CGRect stringRect = [string boundingRectWithSize:constraintSize
+        CGRect stringRect;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            // iOS 7 code
+#if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
+        stringRect = [string boundingRectWithSize:constraintSize
                                                  options:(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
                                               attributes:@{NSFontAttributeName: self.stringLabel.font}
                                                  context:NULL];
+#endif
+        }
+        else
+        {
+            CGSize size  =   [string sizeWithFont:self.stringLabel.font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
+            stringRect.origin   =   CGPointZero;
+            stringRect.size     =   size;
+        }
         stringWidth = stringRect.size.width;
         stringHeight = ceil(stringRect.size.height);
         
@@ -569,8 +592,12 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
     
     if(![self.class isVisible])
         [self.class show];
-    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        // iOS 7 code
+#if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
     self.imageView.tintColor = SVProgressHUDForegroundColor;
+#endif
+    }
     self.imageView.image = image;
     self.imageView.hidden = NO;
     
@@ -635,8 +662,13 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
                              // Tell the rootViewController to update the StatusBar appearance
                              UIViewController *rootController = [[UIApplication sharedApplication] keyWindow].rootViewController;
                              if ([rootController respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+                                 if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+                                     // iOS 7 code
+#if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
                                  [rootController setNeedsStatusBarAppearanceUpdate];
-                             }
+#endif
+                                 }
+                                }
                              // uncomment to make sure UIWindow is gone from app.windows
                              //NSLog(@"%@", [UIApplication sharedApplication].windows);
                              //NSLog(@"keyWindow = %@", [UIApplication sharedApplication].keyWindow);
@@ -752,7 +784,9 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         
         _hudView.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin |
                                      UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin);
-        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            // iOS 7 code
+#if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
         UIInterpolatingMotionEffect *effectX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath: @"center.x" type: UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
         effectX.minimumRelativeValue = @(-SVProgressHUDParallaxDepthPoints);
         effectX.maximumRelativeValue = @(SVProgressHUDParallaxDepthPoints);
@@ -760,9 +794,11 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         UIInterpolatingMotionEffect *effectY = [[UIInterpolatingMotionEffect alloc] initWithKeyPath: @"center.y" type: UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
         effectY.minimumRelativeValue = @(-SVProgressHUDParallaxDepthPoints);
         effectY.maximumRelativeValue = @(SVProgressHUDParallaxDepthPoints);
-        
+
         [_hudView addMotionEffect: effectX];
         [_hudView addMotionEffect: effectY];
+#endif
+        }
         
         [self addSubview:_hudView];
     }
@@ -819,6 +855,8 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 @end
 
 #pragma mark SVIndefiniteAnimatedView
+     
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
 
 @interface SVIndefiniteAnimatedView ()
 
@@ -945,5 +983,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 - (CGSize)sizeThatFits:(CGSize)size {
     return CGSizeMake((self.radius+self.strokeThickness/2+5)*2, (self.radius+self.strokeThickness/2+5)*2);
 }
-
+             
 @end
+             
+//#endif

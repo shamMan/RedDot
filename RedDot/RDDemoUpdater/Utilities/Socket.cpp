@@ -3,8 +3,8 @@
 //  Implementation of the Class Socket
 //  Created on:      09-04-2007 10:55:11
 //  Original author: Yitang Cheng
-// ÐÞ¸ÄÔ­Òò£ºiOSºóÌ¨socket²»ÄÜ·¢Êý¾Ý
-// ½â¾ö·½°¸ÊÇÓÃios×Ô´øµÄCFStreamCreatePairWithSocket·½·¨
+// ï¿½Þ¸ï¿½Ô­ï¿½ï¿½iOSï¿½ï¿½Ì¨socketï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iosï¿½Ô´ï¿½ï¿½CFStreamCreatePairWithSocketï¿½ï¿½ï¿½ï¿½
 ///////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -65,20 +65,20 @@ Socket::Socket(SOCKET fd)
 
 Socket::~Socket()
 {
-//#ifdef TARGET_OS_IPHONE
-//    if (readStream != NULL)
-//    {
-//        CFReadStreamClose(readStream);
-//        CFRelease(readStream);
-//        readStream = NULL;
-//    }
-//    if (writeStream != NULL)
-//    {
-//        CFWriteStreamClose(writeStream);
-//        CFRelease(writeStream);
-//        writeStream = NULL;
-//    }
-//#endif
+#ifdef TARGET_OS_IPHONE
+    if (readStream != NULL)
+    {
+        CFReadStreamClose(readStream);
+        CFRelease(readStream);
+        readStream = NULL;
+    }
+    if (writeStream != NULL)
+    {
+        CFWriteStreamClose(writeStream);
+        CFRelease(writeStream);
+        writeStream = NULL;
+    }
+#endif
 }
 
 
@@ -171,15 +171,17 @@ int Socket::tcpconnect(unsigned short port, unsigned int ip)
             CFStreamCreatePairWithSocket(kCFAllocatorDefault, sock_,
                                          &readStream, &writeStream);
             if (readStream != NULL)
-                CFReadStreamSetProperty(readStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+                CFReadStreamSetProperty(readStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeBackground);
             if (writeStream != NULL)
-                CFWriteStreamSetProperty(writeStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+                CFWriteStreamSetProperty(writeStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeBackground);
             if (CFReadStreamOpen (readStream)) {
                 printf("tcpconnect CFReadStreamOpen success\n");
             }
             if (CFWriteStreamOpen (writeStream)) {
                 printf("tcpconnect CFWriteStreamOpen success\n");
             }
+            CFReadStreamSetProperty(readStream,kCFStreamPropertyShouldCloseNativeSocket,kCFBooleanFalse);
+            CFWriteStreamSetProperty(writeStream,kCFStreamPropertyShouldCloseNativeSocket,kCFBooleanFalse);
 
         }
 #endif

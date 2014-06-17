@@ -214,7 +214,7 @@ BOOL CIncUpdater::CheckUpdateInfo()
 
 	m_dwUpdateBytes = ack.dwBytes;
 
-	m_pSocket->close();
+	//m_pSocket->close();
 	// Start thread to download data
 	cout << "Start thread to download" << endl;
 	Start();
