@@ -46,6 +46,31 @@
 		45B84622194F20EC00909937 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84619194F20EC00909937 /* Utils.cpp */; };
 		45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA94193DF3540057623A /* RDLocationTools.m */; };
 		45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */; };
+		45D0BD2A1951C1BB0025060B /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1A1951C1BB0025060B /* bg.png */; };
+		45D0BD2B1951C1BB0025060B /* bluetooth_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1B1951C1BB0025060B /* bluetooth_d.png */; };
+		45D0BD2C1951C1BB0025060B /* bluetooth_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1C1951C1BB0025060B /* bluetooth_u.png */; };
+		45D0BD2D1951C1BB0025060B /* compass_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1D1951C1BB0025060B /* compass_d.png */; };
+		45D0BD2E1951C1BB0025060B /* compass_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1E1951C1BB0025060B /* compass_u.png */; };
+		45D0BD2F1951C1BB0025060B /* control_mid_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD1F1951C1BB0025060B /* control_mid_d.png */; };
+		45D0BD301951C1BB0025060B /* control_mid_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD201951C1BB0025060B /* control_mid_u.png */; };
+		45D0BD311951C1BB0025060B /* control_minus_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD211951C1BB0025060B /* control_minus_d.png */; };
+		45D0BD321951C1BB0025060B /* control_minus_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD221951C1BB0025060B /* control_minus_u.png */; };
+		45D0BD331951C1BB0025060B /* control_plus_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD231951C1BB0025060B /* control_plus_d.png */; };
+		45D0BD341951C1BB0025060B /* control_plus_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD241951C1BB0025060B /* control_plus_u.png */; };
+		45D0BD351951C1BB0025060B /* data_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD251951C1BB0025060B /* data_d.png */; };
+		45D0BD361951C1BB0025060B /* data_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD261951C1BB0025060B /* data_u.png */; };
+		45D0BD371951C1BB0025060B /* delete_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD271951C1BB0025060B /* delete_d.png */; };
+		45D0BD381951C1BB0025060B /* delete_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD281951C1BB0025060B /* delete_u.png */; };
+		45D0BD391951C1BB0025060B /* download_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD291951C1BB0025060B /* download_d.png */; };
+		45D0BD411951C1C30025060B /* remote_control_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3A1951C1C30025060B /* remote_control_d.png */; };
+		45D0BD421951C1C30025060B /* remote_control_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3B1951C1C30025060B /* remote_control_u.png */; };
+		45D0BD431951C1C30025060B /* remote_control_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3C1951C1C30025060B /* remote_control_x.png */; };
+		45D0BD441951C1C30025060B /* setting_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3D1951C1C30025060B /* setting_d.png */; };
+		45D0BD451951C1C30025060B /* setting_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3E1951C1C30025060B /* setting_u.png */; };
+		45D0BD461951C1C30025060B /* switch_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD3F1951C1C30025060B /* switch_d.png */; };
+		45D0BD471951C1C30025060B /* switch_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD401951C1C30025060B /* switch_u.png */; };
+		45D0BD4A1951C9960025060B /* compass1.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD481951C9960025060B /* compass1.png */; };
+		45D0BD4B1951C9960025060B /* compass2.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0BD491951C9960025060B /* compass2.png */; };
 		45D667E619376F4F0068782E /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D667E519376F4F0068782E /* libbaidumapapi.a */; };
 		8152ABA649544C27846A0F1C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8586B2CDE08344EA86BC8F0E /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -176,6 +201,31 @@
 		45BCAA97193DFC0D0057623A /* BMKUserLocationEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKUserLocationEx.h; sourceTree = "<group>"; };
 		45BCAA98193DFC0D0057623A /* BMKUserLocationEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKUserLocationEx.m; sourceTree = "<group>"; };
 		45C9C322194886C80006D520 /* undef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = undef.h; sourceTree = "<group>"; };
+		45D0BD1A1951C1BB0025060B /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Res/bg.png; sourceTree = "<group>"; };
+		45D0BD1B1951C1BB0025060B /* bluetooth_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluetooth_d.png; path = Res/bluetooth_d.png; sourceTree = "<group>"; };
+		45D0BD1C1951C1BB0025060B /* bluetooth_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluetooth_u.png; path = Res/bluetooth_u.png; sourceTree = "<group>"; };
+		45D0BD1D1951C1BB0025060B /* compass_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compass_d.png; path = Res/compass_d.png; sourceTree = "<group>"; };
+		45D0BD1E1951C1BB0025060B /* compass_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compass_u.png; path = Res/compass_u.png; sourceTree = "<group>"; };
+		45D0BD1F1951C1BB0025060B /* control_mid_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_mid_d.png; path = Res/control_mid_d.png; sourceTree = "<group>"; };
+		45D0BD201951C1BB0025060B /* control_mid_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_mid_u.png; path = Res/control_mid_u.png; sourceTree = "<group>"; };
+		45D0BD211951C1BB0025060B /* control_minus_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_minus_d.png; path = Res/control_minus_d.png; sourceTree = "<group>"; };
+		45D0BD221951C1BB0025060B /* control_minus_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_minus_u.png; path = Res/control_minus_u.png; sourceTree = "<group>"; };
+		45D0BD231951C1BB0025060B /* control_plus_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_plus_d.png; path = Res/control_plus_d.png; sourceTree = "<group>"; };
+		45D0BD241951C1BB0025060B /* control_plus_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = control_plus_u.png; path = Res/control_plus_u.png; sourceTree = "<group>"; };
+		45D0BD251951C1BB0025060B /* data_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = data_d.png; path = Res/data_d.png; sourceTree = "<group>"; };
+		45D0BD261951C1BB0025060B /* data_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = data_u.png; path = Res/data_u.png; sourceTree = "<group>"; };
+		45D0BD271951C1BB0025060B /* delete_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete_d.png; path = Res/delete_d.png; sourceTree = "<group>"; };
+		45D0BD281951C1BB0025060B /* delete_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete_u.png; path = Res/delete_u.png; sourceTree = "<group>"; };
+		45D0BD291951C1BB0025060B /* download_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = download_d.png; path = Res/download_d.png; sourceTree = "<group>"; };
+		45D0BD3A1951C1C30025060B /* remote_control_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remote_control_d.png; path = Res/remote_control_d.png; sourceTree = "<group>"; };
+		45D0BD3B1951C1C30025060B /* remote_control_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remote_control_u.png; path = Res/remote_control_u.png; sourceTree = "<group>"; };
+		45D0BD3C1951C1C30025060B /* remote_control_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remote_control_x.png; path = Res/remote_control_x.png; sourceTree = "<group>"; };
+		45D0BD3D1951C1C30025060B /* setting_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_d.png; path = Res/setting_d.png; sourceTree = "<group>"; };
+		45D0BD3E1951C1C30025060B /* setting_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_u.png; path = Res/setting_u.png; sourceTree = "<group>"; };
+		45D0BD3F1951C1C30025060B /* switch_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_d.png; path = Res/switch_d.png; sourceTree = "<group>"; };
+		45D0BD401951C1C30025060B /* switch_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_u.png; path = Res/switch_u.png; sourceTree = "<group>"; };
+		45D0BD481951C9960025060B /* compass1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compass1.png; path = Res/compass1.png; sourceTree = "<group>"; };
+		45D0BD491951C9960025060B /* compass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compass2.png; path = Res/compass2.png; sourceTree = "<group>"; };
 		45D667E519376F4F0068782E /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = Libs/libbaidumapapi.a; sourceTree = "<group>"; };
 		8586B2CDE08344EA86BC8F0E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACC6029ADB74FB684844810 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -281,6 +331,31 @@
 		047049381936C53800182A69 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				45D0BD3A1951C1C30025060B /* remote_control_d.png */,
+				45D0BD3B1951C1C30025060B /* remote_control_u.png */,
+				45D0BD3C1951C1C30025060B /* remote_control_x.png */,
+				45D0BD3D1951C1C30025060B /* setting_d.png */,
+				45D0BD3E1951C1C30025060B /* setting_u.png */,
+				45D0BD481951C9960025060B /* compass1.png */,
+				45D0BD491951C9960025060B /* compass2.png */,
+				45D0BD3F1951C1C30025060B /* switch_d.png */,
+				45D0BD401951C1C30025060B /* switch_u.png */,
+				45D0BD1A1951C1BB0025060B /* bg.png */,
+				45D0BD1B1951C1BB0025060B /* bluetooth_d.png */,
+				45D0BD1C1951C1BB0025060B /* bluetooth_u.png */,
+				45D0BD1D1951C1BB0025060B /* compass_d.png */,
+				45D0BD1E1951C1BB0025060B /* compass_u.png */,
+				45D0BD1F1951C1BB0025060B /* control_mid_d.png */,
+				45D0BD201951C1BB0025060B /* control_mid_u.png */,
+				45D0BD211951C1BB0025060B /* control_minus_d.png */,
+				45D0BD221951C1BB0025060B /* control_minus_u.png */,
+				45D0BD231951C1BB0025060B /* control_plus_d.png */,
+				45D0BD241951C1BB0025060B /* control_plus_u.png */,
+				45D0BD251951C1BB0025060B /* data_d.png */,
+				45D0BD261951C1BB0025060B /* data_u.png */,
+				45D0BD271951C1BB0025060B /* delete_d.png */,
+				45D0BD281951C1BB0025060B /* delete_u.png */,
+				45D0BD291951C1BB0025060B /* download_d.png */,
 				047049921938523500182A69 /* mapapi.bundle */,
 			);
 			name = Res;
@@ -514,12 +589,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45D0BD441951C1C30025060B /* setting_d.png in Resources */,
 				047049261936C4EE00182A69 /* InfoPlist.strings in Resources */,
 				0470492E1936C4EE00182A69 /* Default.png in Resources */,
+				45D0BD331951C1BB0025060B /* control_plus_d.png in Resources */,
+				45D0BD361951C1BB0025060B /* data_u.png in Resources */,
+				45D0BD301951C1BB0025060B /* control_mid_u.png in Resources */,
+				45D0BD2D1951C1BB0025060B /* compass_d.png in Resources */,
+				45D0BD4B1951C9960025060B /* compass2.png in Resources */,
+				45D0BD411951C1C30025060B /* remote_control_d.png in Resources */,
+				45D0BD461951C1C30025060B /* switch_d.png in Resources */,
+				45D0BD421951C1C30025060B /* remote_control_u.png in Resources */,
+				45D0BD381951C1BB0025060B /* delete_u.png in Resources */,
+				45D0BD2A1951C1BB0025060B /* bg.png in Resources */,
 				047049301936C4EE00182A69 /* Default@2x.png in Resources */,
+				45D0BD471951C1C30025060B /* switch_u.png in Resources */,
+				45D0BD371951C1BB0025060B /* delete_d.png in Resources */,
+				45D0BD321951C1BB0025060B /* control_minus_u.png in Resources */,
+				45D0BD451951C1C30025060B /* setting_u.png in Resources */,
+				45D0BD311951C1BB0025060B /* control_minus_d.png in Resources */,
 				047049321936C4EE00182A69 /* Default-568h@2x.png in Resources */,
+				45D0BD2F1951C1BB0025060B /* control_mid_d.png in Resources */,
+				45D0BD2E1951C1BB0025060B /* compass_u.png in Resources */,
+				45D0BD4A1951C9960025060B /* compass1.png in Resources */,
+				45D0BD351951C1BB0025060B /* data_d.png in Resources */,
+				45D0BD2B1951C1BB0025060B /* bluetooth_d.png in Resources */,
 				0470497C1936C84300182A69 /* RDMainVC.xib in Resources */,
+				45D0BD431951C1C30025060B /* remote_control_x.png in Resources */,
 				047049851937005700182A69 /* RDMapVC.xib in Resources */,
+				45D0BD341951C1BB0025060B /* control_plus_u.png in Resources */,
+				45D0BD2C1951C1BB0025060B /* bluetooth_u.png in Resources */,
+				45D0BD391951C1BB0025060B /* download_d.png in Resources */,
 				047049931938523500182A69 /* mapapi.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
