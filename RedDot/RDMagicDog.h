@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger,MagicDogKeyType)
 };
 
 typedef NS_ENUM(NSUInteger, DogStatus) {
+    DogStatusWaitPoweredOn,
     DogStatusConnected,
     DogStatusDisconnected,
     DogStatusStatusError

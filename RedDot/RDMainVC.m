@@ -9,8 +9,9 @@
 #import "RDMainVC.h"
 #import "RDNetwork.h"
 #import "RDBlueToothDeviceManager.h"
+#import "RDMagicDog.h"
 
-@interface RDMainVC ()
+@interface RDMainVC ()<DogDelegate>
 @end
 
 @implementation RDMainVC
@@ -47,8 +48,8 @@
     [Config shareInstance].delegateD    =   nil;
     [_debugView release];
     [_btnMap release];
-    [_btnBlueT release];
-    [_btnSocket release];
+    [_btnControl release];
+    [_btnSetting release];
     [_mapVC release];
     [super dealloc];
 }
@@ -77,12 +78,22 @@
     [self.navigationController pushViewController:self.mapVC animated:TRUE];
 }
 
-- (IBAction)doBlueT:(id)sender {
-    [[RDBlueToothDeviceManager shareInstance] StartIntelligentConnect];
+- (IBAction)doDogControl:(id)sender {
+    
 }
 
-- (IBAction)doSocket:(id)sender {
+- (IBAction)doSetting:(id)sender {
     RDNetwork* network  =   [RDNetwork ShareInstance];
     [network connectToServer];
+}
+
+- (void)dog:(RDMagicDog*)dog statusChanged:(DogStatus) status
+{
+}
+- (void)dog:(RDMagicDog*)dog didUpdateHeading:(CLHeading *)newHeading
+{
+}
+- (void)dog:(RDMagicDog*)dog didUpdateLocation:(CLLocation *)newLocation
+{
 }
 @end

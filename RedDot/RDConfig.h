@@ -14,6 +14,8 @@
 - (void)AppendLog:(NSString*)log;
 @end
 
+#define RDLOG(fmt,...) [[Config shareInstance]PLOG:fmt,...]
+
 // appsotre 发布版
 //#define APPSTORE_RELEASE
 // 是否使用 CLCoreLocation

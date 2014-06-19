@@ -13,11 +13,13 @@
 @interface RDMainVC : UIViewController <DebugProctocal>
 @property (retain, nonatomic) IBOutlet UITextView *debugView;
 @property (retain, nonatomic) IBOutlet UIButton *btnMap;
-@property (retain, nonatomic) IBOutlet UIButton *btnBlueT;
-@property (retain, nonatomic) IBOutlet UIButton *btnSocket;
+@property (retain, nonatomic) IBOutlet UIButton *btnControl;
+@property (retain, nonatomic) IBOutlet UIButton *btnSetting;
 @property (retain, nonatomic) RDMapVC* mapVC;
 - (IBAction)doMap:(id)sender;
-- (IBAction)doBlueT:(id)sender;
-- (IBAction)doSocket:(id)sender;
+- (IBAction)doDogControl:(id)sender;
+- (IBAction)doSetting:(id)sender;
+
+
 
 @end

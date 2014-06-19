@@ -76,30 +76,47 @@
 // 升级
 -(BOOL)updateMap
 {
+    return TRUE;
 }
 // 定位
 -(BOOL)openNMEAEN
 {
+    return TRUE;
 }
 // 定位
 -(BOOL)closeNMEAEN
 {
+    return TRUE;
 }
 // 路况
 -(BOOL)startScanRoadInfo
 {
+    return TRUE;
 }
 // 按键
 -(BOOL)SendVirtualKey:(MagicDogKeyType)key
 {
+    return TRUE;
 }
 // 投诉
 -(BOOL)POI
 {
+    return TRUE;
 }
 // 播放TTS
 -(BOOL)playTTS
 {
+    return TRUE;
+}
+
+-(void)setStatus:(DogStatus)status
+{
+    if (_status != status) {
+        _status =   status;
+    }
+    if (_delegate) {
+        [_delegate dog:self statusChanged:status];
+    }
 }
 
 #pragma mark - CBCentralManagerDelegate
@@ -114,7 +131,9 @@
         @"CBCentralManagerStatePoweredOn"
     };
     [[Config shareInstance] PLOG:@"centralManagerDidUpdateState:%s %@",__func__,strStatus[central.state]];
-    [self.delegate Manager:self statusChanged:(BLDeviceManagerStatus)central.state];
+    if (central.state == CBCentralManagerStatePoweredOff) {
+        self.status =   DogStatusWaitPoweredOn;
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
@@ -122,21 +141,10 @@
     [[Config shareInstance] PLOG:@"%s %@",__func__,dict];
 }
 
-- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
-{
-    [[Config shareInstance] PLOG:@"%s %@",__func__,peripherals];
-}
-
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
-{
-    [[Config shareInstance] PLOG:@"%s %@",__func__,peripherals];
-}
-
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     [[Config shareInstance] PLOG:@"%s %@ %@ %@",__func__,peripheral,advertisementData,RSSI];
     [_centralManager stopScan];
-    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusDiscovered];
     [_centralManager connectPeripheral:peripheral options:nil];
 }
 
@@ -145,19 +153,20 @@
     self.peripheral =   peripheral;
     self.peripheral.delegate    =   self;
     [[Config shareInstance] PLOG:@"%s %@",__func__,peripheral];
-    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusConnected];
+    self.status =   DogStatusConnected;
     [self.peripheral discoverServices:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    self.status =   DogStatusDisconnected;
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
-    [self.delegate Manager:self statusChanged:BLDeviceManagerStatusDisconnected];
+    self.status =   DogStatusDisconnected;
 }
 #pragma mark --
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral
