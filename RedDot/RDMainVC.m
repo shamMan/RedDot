@@ -30,17 +30,41 @@
     return self;
 }
 
+-(UIImage*)btnCtrlImageD
+{
+    if (!_btnCtrlImageD) {
+        _btnCtrlImageD  =   [[UIImage imageNamed:@"remote_control_d.png"] retain];
+    }
+    return _btnCtrlImageD;
+}
+-(UIImage*)btnCtrlImageU
+{
+    if (!_btnCtrlImageU) {
+        _btnCtrlImageU  =   [[UIImage imageNamed:@"remote_control_d.png"] retain];
+    }
+    return _btnCtrlImageU;
+}
+-(UIImage*)btnCtrlImageX
+{
+    if (!_btnCtrlImageX) {
+        _btnCtrlImageX  =   [[UIImage imageNamed:@"remote_control_d.png"] retain];
+    }
+    return _btnCtrlImageX;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [Config shareInstance].delegateD    =   self;
+    _bControlPushed =   FALSE;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 - (void)dealloc
@@ -51,6 +75,9 @@
     [_btnControl release];
     [_btnSetting release];
     [_mapVC release];
+    [_btnCtrlImageD release];
+    [_btnCtrlImageU release];
+    [_btnCtrlImageX release];
     [super dealloc];
 }
 
@@ -79,6 +106,9 @@
 }
 
 - (IBAction)doDogControl:(id)sender {
+    _bControlPushed =   !_bControlPushed;
+    UIImage* imge   =   _bControlPushed?self.btnCtrlImageD:self.btnCtrlImageU ;
+    [self.btnControl setImage:imge forState:UIControlStateNormal];
     
 }
 
@@ -89,6 +119,26 @@
 
 - (void)dog:(RDMagicDog*)dog statusChanged:(DogStatus) status
 {
+    switch (status) {
+        case DogStatusWaitPoweredOn:
+            
+            break;
+        case DogStatusConnected:
+        {
+            self.btnControl.enabled =   TRUE;
+            [self.btnControl setImage:[UIImage imageNamed:@"remote_control_u.png"] forState:UIControlStateNormal];
+        }
+            break;
+        case DogStatusDisconnected:
+        case DogStatusStatusError:
+        {
+            self.btnControl.enabled =   FALSE;
+            [self.btnControl setImage:[UIImage imageNamed:@"remote_control_x.png"] forState:UIControlStateNormal];
+        }
+            break;
+        default:
+            break;
+    }
 }
 - (void)dog:(RDMagicDog*)dog didUpdateHeading:(CLHeading *)newHeading
 {
