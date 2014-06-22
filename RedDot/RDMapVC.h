@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
-#import "RDBaseLocationService.h"
 
-@interface RDMapVC : UIViewController <BMKMapViewDelegate,RDLocationServiceDelegate>
+@interface RDMapVC : UIViewController <BMKMapViewDelegate>
 {
 }
 @property (retain, nonatomic) IBOutlet BMKMapView *mapView;
@@ -18,9 +17,13 @@
 @property (retain,nonatomic) NSMutableArray*    localtions;
 // 当前位置
 @property (retain,nonatomic) CLLocation*        curLocation;
+// 当前位置
+@property (retain,nonatomic) CLHeading*         curHeading;
 //
 @property (retain,nonatomic) BMKPolyline*       polyLine;
-// 定位服务，如果使用外置GPS可以参照这个
-@property (retain,nonatomic) RDBaseLocationService*    localtionService;
+
+
+-(void)updateHeading:(CLHeading *)newHeading;
+-(void)updateLocation:(CLLocation *)newLocation;
 
 @end

@@ -34,6 +34,7 @@
 		0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04945948193DC27000F5B03C /* RDinnerLocationService.m */; };
 		04945950193EF3B800F5B03C /* RDBlueToothDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494594F193EF3B800F5B03C /* RDBlueToothDeviceManager.m */; };
 		04945952193EF41600F5B03C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04945951193EF41600F5B03C /* CoreBluetooth.framework */; };
+		4502841C19568F7A00EF1D29 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4502841B19568F7A00EF1D29 /* AudioToolbox.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
 		45B8461B194F20EC00909937 /* IncUpdater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84609194F20EC00909937 /* IncUpdater.cpp */; };
@@ -174,6 +175,8 @@
 		0494594E193EF3B800F5B03C /* RDBlueToothDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBlueToothDeviceManager.h; sourceTree = "<group>"; };
 		0494594F193EF3B800F5B03C /* RDBlueToothDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDBlueToothDeviceManager.m; sourceTree = "<group>"; };
 		04945951193EF41600F5B03C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		4502841A19568F7900EF1D29 /* RedDot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RedDot.entitlements; sourceTree = "<group>"; };
+		4502841B19568F7A00EF1D29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		451EF9EC19444BC3000689B3 /* RDNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNetwork.m; sourceTree = "<group>"; };
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 				0470498F1937124300182A69 /* SystemConfiguration.framework in Frameworks */,
 				0470498D193711AB00182A69 /* CFNetwork.framework in Frameworks */,
 				0470498B1937119200182A69 /* OpenGLES.framework in Frameworks */,
+				4502841C19568F7A00EF1D29 /* AudioToolbox.framework in Frameworks */,
 				047049891937032700182A69 /* QuartzCore.framework in Frameworks */,
 				047049871937031700182A69 /* CoreLocation.framework in Frameworks */,
 				0470491C1936C4EE00182A69 /* UIKit.framework in Frameworks */,
@@ -279,6 +283,7 @@
 		0470491A1936C4EE00182A69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4502841B19568F7A00EF1D29 /* AudioToolbox.framework */,
 				04945951193EF41600F5B03C /* CoreBluetooth.framework */,
 				047049901937127100182A69 /* Security.framework */,
 				0470498E1937124300182A69 /* SystemConfiguration.framework */,
@@ -297,6 +302,7 @@
 		047049211936C4EE00182A69 /* RedDot */ = {
 			isa = PBXGroup;
 			children = (
+				4502841A19568F7900EF1D29 /* RedDot.entitlements */,
 				45B84607194F20EC00909937 /* RDDemoUpdater */,
 				0494594C193EAF3E00F5B03C /* bluetooth */,
 				0494594D193EAF3E00F5B03C /* network */,
@@ -566,6 +572,11 @@
 				CLASSPREFIX = RD;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = ShawLiao;
+				TargetAttributes = {
+					047049171936C4EE00182A69 = {
+						DevelopmentTeam = 2K8Q7EDHKF;
+					};
+				};
 			};
 			buildConfigurationList = 047049131936C4EE00182A69 /* Build configuration list for PBXProject "RedDot" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -761,6 +772,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RedDot/RedDot.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
@@ -779,6 +791,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RedDot/RedDot.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";

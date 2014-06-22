@@ -11,6 +11,9 @@
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLHeading.h>
 
+// Define Block
+typedef void (^DogGeneralCommandBlock) (BOOL bSuccess);
+
 typedef NS_ENUM(NSUInteger,MagicDogKeyType)
 {
     MagicDogKeyTypeUp   =   0,
@@ -24,6 +27,11 @@ typedef NS_ENUM(NSUInteger, DogStatus) {
     DogStatusConnected,
     DogStatusDisconnected,
     DogStatusStatusError
+};
+
+typedef NS_ENUM(NSUInteger, DogCommand) {
+    DogCommandUnknow,
+    DogCommandAskMode      //  握手
 };
 
 @class RDMagicDog;
@@ -42,8 +50,16 @@ typedef NS_ENUM(NSUInteger, DogStatus) {
 @property (retain,nonatomic) CBCentralManager*  centralManager;
 @property (retain,nonatomic) CBPeripheral*      peripheral;
 @property (assign,nonatomic) DogStatus          status;
+@property (readonly, nonatomic) DogCommand      lastCommand;
+// 型号,Connect 后可用
+@property (readonly,nonatomic) NSString*    modename;
+
+// TEST
+@property (retain,nonatomic) CBCharacteristic*  writeChar;
 
 +(RDMagicDog*)linkDogWithDelegate:(id<DogDelegate>)delegate;
+// 获取版本
+-(BOOL)askModeWithCompleteBlock:(DogGeneralCommandBlock) block;
 // 升级
 -(BOOL)updateMap;
 // 定位

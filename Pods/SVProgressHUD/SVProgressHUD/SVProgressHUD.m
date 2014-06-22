@@ -209,7 +209,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
             // iOS 7 code
             #if __IPHONE_OS_VERSION_MAX_ALLOWED != __IPHONE_6_1
-            [SVProgressHUDFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+             SVProgressHUDFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
              SVProgressHUDSuccessImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/success"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
              SVProgressHUDErrorImage = [[UIImage imageNamed:@"SVProgressHUD.bundle/error"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             #endif

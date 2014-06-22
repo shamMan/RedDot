@@ -8,9 +8,9 @@
 
 #import "RDMapVC.h"
 #import "RDConfig.h"
-#import "RDInnerLocationService.h"
-#import "RDLocationTools.h"
 #import "BMKUserLocationEx.h"
+#import "RDLocationTools.h"
+
 
 @interface RDMapVC ()
 // 更新画轨迹
@@ -41,8 +41,7 @@
     _mapView.centerCoordinate    =   CLLocationCoordinate2DMake(30.1784,120.1414);
     self.mapView.showsUserLocation = YES;
     self.mapView.userTrackingMode   =   BMKUserTrackingModeFollow;
-    _localtionService   =   [[RDInnerLocationService alloc] init];
-    _localtionService.delegate  =   self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,11 +52,9 @@
 
 -(void)dealloc
 {
-    [_localtionService stopLocationService];
     [_mapView release];
     [_localtions release];
     [_curLocation release];
-    [_localtionService release];
     [super dealloc];
 }
 
@@ -65,13 +62,11 @@
 {
     [self.mapView viewWillAppear];
     self.mapView.delegate    =   self;
-    [_localtionService startLocationService];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.mapView viewWillDisappear];
     self.mapView.delegate    =   nil;
-    [_localtionService stopLocationService];
 }
 
 -(void)updateTraceLine
@@ -129,20 +124,12 @@
     }
     return nil;
 }
-#pragma mark - RDLocationServiceDelegate
-- (void)serviceWillStartLocating:(id)service
+
+-(void)updateHeading:(CLHeading *)newHeading
 {
-    [[Config shareInstance] PLOG:@"%s",__func__];
+    self.curHeading =   newHeading;
 }
-- (void)serviceDidStopLocating:(id)service
-{
-    [[Config shareInstance] PLOG:@"%s",__func__];
-}
-- (void)service:(id)service didUpdateHeading:(CLHeading *)newHeading
-{
-    //[[Config shareInstance] PLOG:@"%s",__func__];
-}
-- (void)service:(id)service didUpdateLocation:(CLLocation *)newLocation
+-(void)updateLocation:(CLLocation *)newLocation
 {
     //[[Config shareInstance] PLOG:@"%s",__func__];
     if (newLocation)
@@ -151,9 +138,8 @@
         // 转换 GPS 到 百度坐标
         CLLocation* bLocation   =   [RDLocationTools CLLocationApplyBaiDuTransform:newLocation];
         [userLocation SetCLLocation:bLocation];
-        [userLocation SetCLHeading:((RDBaseLocationService*)service).curHeading];
+        [userLocation SetCLHeading:self.curHeading];
         CLLocation *location    =   userLocation.location;
-        
         
         [[Config shareInstance] PLOG:@"Location:[%0.4f,%0.4f-%0.4f%]",location.coordinate.latitude,location.coordinate.longitude,location.altitude];
         // check the zero point检查零点
@@ -176,9 +162,5 @@
         [self.mapView updateLocationData:userLocation];
         [userLocation release];
     }
-}
-- (void)didFailToLocateUserWithError:(NSError *)error
-{
-    [[Config shareInstance] PLOG:@"%s error:%@",__func__,error];
 }
 @end

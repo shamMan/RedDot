@@ -10,8 +10,10 @@
 #import "RDConfig.h"
 
 @interface RDMagicDog()<CBCentralManagerDelegate,CBPeripheralDelegate>
+@property (copy,nonatomic) DogGeneralCommandBlock commandBlock;
 -(BOOL)foundAndConnect;
 -(BOOL)cleanUp;
+-(BOOL)writeStr:(NSString*)str;
 @end
 
 @implementation RDMagicDog
@@ -43,6 +45,7 @@
 {
     [_centralManager release];
     [_peripheral release];
+    [_modename release];
     [super dealloc];
 }
 
@@ -73,6 +76,20 @@
     }
     return TRUE;
 }
+-(BOOL)writeStr:(NSString*)str
+{
+    NSLog(@"send str:%@", str);
+    NSData* aData = [str dataUsingEncoding: NSASCIIStringEncoding];
+    [self.peripheral writeValue:aData forCharacteristic:self.writeChar type:CBCharacteristicWriteWithoutResponse];
+    return TRUE;
+}
+-(BOOL)askModeWithCompleteBlock:(DogGeneralCommandBlock) block;
+{
+    [self writeStr:@"Ego"];
+    self.commandBlock   =   block;
+    _lastCommand    =   DogCommandAskMode;
+    return TRUE;
+}
 // 升级
 -(BOOL)updateMap
 {
@@ -96,6 +113,24 @@
 // 按键
 -(BOOL)SendVirtualKey:(MagicDogKeyType)key
 {
+    NSString* str   =   nil;
+    switch (key) {
+        case MagicDogKeyTypeMode:
+            str =   @"MODEKEY";
+            break;
+        case MagicDogKeyTypeUp:
+            str =   @"UPKEY";
+            break;
+        case MagicDogKeyTypeDown:
+            str =   @"DOWNKEY";
+            break;
+        case MagicDogKeyTypeMute:
+            str =   @"MUTEKEY";
+            break;
+        default:
+            break;
+    }
+    [self writeStr:str];
     return TRUE;
 }
 // 投诉
@@ -134,6 +169,9 @@
     if (central.state == CBCentralManagerStatePoweredOff) {
         self.status =   DogStatusWaitPoweredOn;
     }
+    if (central.state == CBCentralManagerStatePoweredOn) {
+        [self foundAndConnect];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
@@ -153,7 +191,7 @@
     self.peripheral =   peripheral;
     self.peripheral.delegate    =   self;
     [[Config shareInstance] PLOG:@"%s %@",__func__,peripheral];
-    self.status =   DogStatusConnected;
+    //self.status =   DogStatusConnected;
     [self.peripheral discoverServices:nil];
 }
 
@@ -201,7 +239,7 @@
 	}
     
 	for (CBService *service in services) {
-		[[Config shareInstance] PLOG:@"Service found: %@ isPrimary:%d \t{",service.UUID,service.isPrimary];
+		[[Config shareInstance] PLOG:@"Service found: %@ isPrimary:%d \t{",service,service.isPrimary];
         [_peripheral discoverCharacteristics:nil forService:service];
         [[Config shareInstance] PLOG:@"\t}"];
     }
@@ -212,20 +250,57 @@
 }
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    [[Config shareInstance] PLOG:@"%s service:%@ error:%@",__func__,service,error];
     for(CBCharacteristic*characteristic in service.characteristics)
     {
-        [[Config shareInstance] PLOG:@"charac:%@",characteristic];
-        [_peripheral setNotifyValue:YES forCharacteristic:characteristic];
+        [[Config shareInstance] PLOG:@"charac:%@ ,0x%x",characteristic,characteristic.properties];
+        switch (characteristic.properties) {
+            case CBCharacteristicPropertyRead:
+                [_peripheral readValueForCharacteristic:characteristic];
+                break;
+            case CBCharacteristicPropertyWriteWithoutResponse:
+                self.writeChar  =   characteristic;
+                self.status =   DogStatusConnected;
+                break;
+            case CBCharacteristicPropertyNotify:
+                [_peripheral setNotifyValue:YES forCharacteristic:characteristic];
+                break;
+            default:
+                break;
+        }
+        //[_peripheral readValueForCharacteristic:characteristic];
+        //[_peripheral setNotifyValue:YES forCharacteristic:characteristic];
     }
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    NSString *value = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    NSLog(@"Value %@",value);
+    [[Config shareInstance] PLOG:@"%s %@ value:%@",__func__,error,value];
+    switch (self.lastCommand) {
+        case DogCommandAskMode:
+        {
+            // SF4201-CONNECT
+            if ([value hasSuffix:@"-CONNECT\r\n"]) {
+                int index   =   [value length] - 10;
+                _modename   =   [[value substringToIndex:index] retain];
+                self.commandBlock(TRUE);
+            }
+            else
+            {
+                self.commandBlock(FALSE);
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+    
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
