@@ -29,7 +29,7 @@
 - (NSString*)GetServerAddress
 {
     //return @"update.gps-car.cn";
-    return @"update.gps-car.cn";
+    return @"data.gps-car.cn";
 }
 - (unsigned short)GetServerPort
 {

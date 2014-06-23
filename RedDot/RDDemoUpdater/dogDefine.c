@@ -1,14 +1,7 @@
-//#include "StdAfx.h"
-#include "IncUpdater.h"
-#include "./Utilities/Socket.h"
-#include "./Utilities/Thread.h"
-#include <iostream>
-#include <time.h>
-
-using namespace std;
+#include "dogDefine.h"
 
 ///< 纬度对应的每纬度公里值
-const UINT8 KmPerLongitude[] = 
+static const UINT8 KmPerLongitude[] =
 {
 	111,    111,    111,    111,    111,    110,    110,    110,    110,    109,
 	109,    109,    108,    108,    107,    107,    106,    106,    105,    104,
@@ -70,40 +63,6 @@ UINT16 crc16Get(const UINT8  *buf, UINT16 len)
 	return crc;
 }
 
-CIncUpdater::CIncUpdater(void)
-{
-	initNetwork();
-	sockaddress addr(DSA_UPDATE_PORT, DSA_UPDATE_SERVER); 
-	m_dwAddr = addr.ip_;
-	stuPackageHeader.nFlag = 0xA5;
-	m_pSendBuffer = NULL;
-	m_bWifiOnly = FALSE;
-	m_dwUpdateBytes = 0;
-
-
-	m_dwAppVersion = 0;
-	m_dwHWVersion = 0;
-	m_dwDataTime = 0;
-
-	m_pSendBuffer = new UINT8[1400];
-	m_pSocket = new Socket;
-}
-
-CIncUpdater::~CIncUpdater(void)
-{
-	delete m_pSocket;
-	m_pSocket = NULL;
-	delete [] m_pSendBuffer;
-}
-
-BOOL CIncUpdater::CheckTcpConnected()
-{
-	if (m_pSocket == NULL)
-		m_pSocket = new Socket;
-	if (m_pSocket->tcpisconnected() == 0)
-		return TRUE;
-	return m_pSocket->tcpconnect(DSA_UPDATE_PORT, m_dwAddr) == 0;
-}
 /**
 *@fn void DecodePkgHead(STU_PACKAGE_HEADER*pkgHead)
 *@brief 解析包头
@@ -112,7 +71,7 @@ BOOL CIncUpdater::CheckTcpConnected()
 *@date 2013/8/21
 *@author liusk
 */
-void CIncUpdater::DecodePkgHead(STU_PACKAGE_HEADER*pkgHead)
+void DecodePkgHead(STU_PACKAGE_HEADER*pkgHead)
 {
 	pkgHead->nReq^=PKG_HEAD_FLAG;
 	pkgHead->nPktSize^=(((pkgHead->nFlag+0x11)<<8)|pkgHead->nFlag);
@@ -126,13 +85,11 @@ void CIncUpdater::DecodePkgHead(STU_PACKAGE_HEADER*pkgHead)
 *@date 2013/8/21
 *@author liusk
 */
-
-void CIncUpdater::SetPkgHead(STU_PACKAGE_HEADER* header,UINT8*p8Data,UINT16 paramLen)
+void SetPkgHead(STU_PACKAGE_HEADER* header,UINT8*p8Data,UINT16 paramLen)
 {		
 	UINT16* p16Data;
 	UINT16 enCodeIndex; ///< 加密因子
 	UINT16 i;
-
 
 	p16Data=(UINT16*)p8Data;
 
@@ -152,7 +109,7 @@ void CIncUpdater::SetPkgHead(STU_PACKAGE_HEADER* header,UINT8*p8Data,UINT16 para
 	header->nCrc16=crc16Get(p8Data,paramLen);		  
 }
 
-int CIncUpdater::CheckPkgHead(UINT8* p8Data, UINT16 len)
+int CheckPkgHead(UINT8* p8Data, UINT16 len)
 {
 	STU_PACKAGE_HEADER* header = (STU_PACKAGE_HEADER*)p8Data;
 	DecodePkgHead(header);
@@ -174,7 +131,7 @@ int CIncUpdater::CheckPkgHead(UINT8* p8Data, UINT16 len)
 }
 
 
-BOOL CIncUpdater::CheckUpdateInfo()
+BOOL CheckUpdateInfo()
 {
 	STU_PACKAGE_HEADER* header = (STU_PACKAGE_HEADER*)m_pSendBuffer;
 	STU_UPDATE_CHECK_REQ* req = (STU_UPDATE_CHECK_REQ*)(m_pSendBuffer + sizeof(STU_PACKAGE_HEADER));

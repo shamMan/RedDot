@@ -2,7 +2,7 @@
 #ifdef WIN32
 #include <WTypes.h>
 #endif
-#include "IncUpdate.h"
+#include "dogDefine.h"
 #include "./Utilities/Thread.h"
 class Socket;
 class CIncUpdater : public Thread

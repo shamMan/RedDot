@@ -1,5 +1,6 @@
 #import "RDNetwork.h"
 #import "RDConfig.h"
+#import "dogDefine.h"
 
 @interface RDNetwork()<NSStreamDelegate>
 @property (retain,nonatomic) NSInputStream* iStream;
@@ -87,6 +88,12 @@
     [_oStream release];
     [super dealloc];
 }
+#pragma mark -- 公开请求
+-(BOOL)checkUpdateWithHardType:(unsigned int)haderType andSoftVersion:(unsigned int)softVersion andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block
+{
+    
+}
+
 #pragma mark -- NSStreamDelegate
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {

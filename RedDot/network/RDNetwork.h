@@ -10,15 +10,16 @@
 #import <CoreLocation/CLLocation.h>
 
 // Define Block
-typedef void (^AskUpdateRequestBlock) (BOOL bSuccess);
+typedef void (^AskUpdateRequestBlock) (BOOL bNeedUpdate,int pkgSize,int totalSize);
 
 @interface RDNetwork : NSObject
 @property (readonly) BOOL connect;
+@property (copy,nonatomic) AskUpdateRequestBlock askUpdateBlock;
 
 +(RDNetwork*)ShareInstance;
 
 -(BOOL)connectToServer;
 -(BOOL)close;
 // 升级查询
--(BOOL)checkUpdateWithHardType:(unsigned int)haderType andSoftVersion:(unsigned int)softVersion andLocation:(CLLocation*)location;
+-(BOOL)checkUpdateWithHardType:(unsigned int)haderType andSoftVersion:(unsigned int)softVersion andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block;
 @end

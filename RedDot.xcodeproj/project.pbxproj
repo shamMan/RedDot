@@ -37,7 +37,7 @@
 		4502841C19568F7A00EF1D29 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4502841B19568F7A00EF1D29 /* AudioToolbox.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
-		45B8461B194F20EC00909937 /* IncUpdater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84609194F20EC00909937 /* IncUpdater.cpp */; };
+		45B8461B194F20EC00909937 /* dogDefine.c in Sources */ = {isa = PBXBuildFile; fileRef = 45B84609194F20EC00909937 /* dogDefine.c */; };
 		45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460C194F20EC00909937 /* AutoLock.cpp */; };
 		45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460E194F20EC00909937 /* DataStruct.cpp */; };
 		45B8461E194F20EC00909937 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B84610194F20EC00909937 /* Event.cpp */; };
@@ -181,8 +181,8 @@
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
-		45B84608194F20EC00909937 /* IncUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncUpdate.h; sourceTree = "<group>"; };
-		45B84609194F20EC00909937 /* IncUpdater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IncUpdater.cpp; sourceTree = "<group>"; };
+		45A87B5E195859550000A2D1 /* dogDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dogDefine.h; sourceTree = "<group>"; };
+		45B84609194F20EC00909937 /* dogDefine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dogDefine.c; sourceTree = "<group>"; };
 		45B8460A194F20EC00909937 /* IncUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncUpdater.h; sourceTree = "<group>"; };
 		45B8460C194F20EC00909937 /* AutoLock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoLock.cpp; sourceTree = "<group>"; };
 		45B8460D194F20EC00909937 /* AutoLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLock.h; sourceTree = "<group>"; };
@@ -494,8 +494,8 @@
 		45B84607194F20EC00909937 /* RDDemoUpdater */ = {
 			isa = PBXGroup;
 			children = (
-				45B84608194F20EC00909937 /* IncUpdate.h */,
-				45B84609194F20EC00909937 /* IncUpdater.cpp */,
+				45A87B5E195859550000A2D1 /* dogDefine.h */,
+				45B84609194F20EC00909937 /* dogDefine.c */,
 				45B8460A194F20EC00909937 /* IncUpdater.h */,
 				45B8460B194F20EC00909937 /* Utilities */,
 			);
@@ -690,7 +690,7 @@
 				45B8461E194F20EC00909937 /* Event.cpp in Sources */,
 				0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */,
 				45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */,
-				45B8461B194F20EC00909937 /* IncUpdater.cpp in Sources */,
+				45B8461B194F20EC00909937 /* dogDefine.c in Sources */,
 				45B84622194F20EC00909937 /* Utils.cpp in Sources */,
 				45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */,
 				45B84620194F20EC00909937 /* thread.cpp in Sources */,
