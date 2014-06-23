@@ -37,9 +37,7 @@
 //static NSString* kBaiduMapKey   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 static NSString* UNUSED_PARAM(kBaiduMapKey)   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 
-// 升级服务器地址及端口
-#define DAS_HOST "update.gps-car.cn"
-#define DAS_PORT 21211
+
 
 @interface Config : NSObject
 @property (assign,nonatomic) id<DebugProctocal> delegateD;
@@ -51,7 +49,8 @@ static NSString* UNUSED_PARAM(kBaiduMapKey)   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 
 #pragma mark - Debug Tool
 - (void)PLOG:(NSString *)format, ...;
-#pragma mark - URL Address
+#pragma mark - 升级服务器地址及端口
 - (NSString*)GetServerAddress;
+- (unsigned short)GetServerPort;
 
 @end

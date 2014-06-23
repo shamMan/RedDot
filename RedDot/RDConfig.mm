@@ -28,13 +28,12 @@
 
 - (NSString*)GetServerAddress
 {
-    NSUserDefaults* userDefault =   [NSUserDefaults standardUserDefaults];
-    NSString* ret   =   [userDefault stringForKey:@"server-address"];
-    if (ret == nil)
-    {
-       ret = @"srv1.vurbleapp.com";
-    }
-    return ret;
+    //return @"update.gps-car.cn";
+    return @"update.gps-car.cn";
+}
+- (unsigned short)GetServerPort
+{
+    return 21211;
 }
 
 - (void)PLOG:(NSString *)format, ...

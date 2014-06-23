@@ -17,10 +17,27 @@
     });
     return sharedNetworkInstance;
 }
+-(id)init
+{
+    self    =   [super init];
+    _connect    =   FALSE;
+    return self;
+}
+-(BOOL)close
+{
+    if (_connect) {
+        self.iStream    =   nil;
+        self.oStream    =   nil;
+        _connect    =   FALSE;
+    }
+    return TRUE;
+}
 -(BOOL)connectToServer
 {
     //CFString
-    CFStringRef host    =   CFSTR(DAS_HOST);
+    NSString* DAS_HOST    =   [[Config shareInstance] GetServerAddress];
+    unsigned short DAS_PORT =   [[Config shareInstance] GetServerPort];
+    CFStringRef host    =   (CFStringRef)DAS_HOST;
     const unsigned int port =   DAS_PORT;
     CFReadStreamRef readStream;
     CFWriteStreamRef    writeStream;
