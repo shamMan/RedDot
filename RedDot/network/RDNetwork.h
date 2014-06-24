@@ -10,7 +10,7 @@
 #import <CoreLocation/CLLocation.h>
 
 // Define Block
-typedef void (^AskUpdateRequestBlock) (BOOL bNeedUpdate,int pkgSize,int totalSize);
+typedef void (^AskUpdateRequestBlock) (BOOL bSuccess,BOOL bNeedUpdate,int pkgSize,int totalSize);
 
 @interface RDNetwork : NSObject
 {
@@ -18,9 +18,12 @@ typedef void (^AskUpdateRequestBlock) (BOOL bNeedUpdate,int pkgSize,int totalSiz
     int  _bufferLen;
     unsigned char* _readBuffer;
     unsigned char* _writeBuffer;
+    
 }
 @property (readonly) BOOL connect;
 @property (copy,nonatomic) AskUpdateRequestBlock askUpdateBlock;
+// 当前请求类型
+@property (assign)  int curReqType;
 
 +(RDNetwork*)ShareInstance;
 

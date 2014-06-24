@@ -2,6 +2,10 @@
 #import "RDConfig.h"
 #import "dogDefine.h"
 
+
+#define NONE_REU_TYPE 0
+static const int c_pkg_head_len =   6;
+
 @interface RDNetwork()<NSStreamDelegate>
 @property (retain,nonatomic) NSInputStream* iStream;
 @property (retain,nonatomic) NSOutputStream* oStream;
@@ -25,7 +29,8 @@
     self    =   [super init];
     _connect    =   FALSE;
     
-    _bufferLen =   1400;
+    _curReqType =   NONE_REU_TYPE;
+    _bufferLen  =   1400;
     _readBuffer     =   (unsigned char*)malloc(_bufferLen);
     _writeBuffer    =   (unsigned char*)malloc(_bufferLen);
     
@@ -34,7 +39,6 @@
 -(unsigned int)now
 {
     unsigned int ret    =   0;
-    NSDate*  date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *now =   [NSDate date];
     NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
@@ -119,6 +123,11 @@
 #pragma mark -- 公开请求
 -(BOOL)checkUpdateWithHardType:(NSString*)hardwareType andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block
 {
+    if (![self.oStream hasSpaceAvailable]) {
+        [[Config shareInstance] PLOG:@"checkUpdateWithHardType Failed,because of ostream not ready"];
+        return FALSE;
+    }
+    self.askUpdateBlock =   block;
     // 序列号，固件本版，硬件版本 等未启用参数
     const char* _serNo  =   "000000000000";
     INT32   _SWVer  =   0;
@@ -153,8 +162,15 @@
 	SetPkgHead(header, (UINT8*)req, sizeof(STU_UPDATE_CHECK_REQ));
     
 	int len = sizeof(STU_PACKAGE_HEADER) + sizeof(STU_UPDATE_CHECK_REQ);
-    
-//	
+    NSInteger writed  =   [self.oStream write:_writeBuffer maxLength:len];
+    if (writed != len)
+    {
+        NSLog(@"ostream write failed,need:%d writed:%lu",len,writed);
+        return FALSE;
+    }
+    self.curReqType =   REQ_UPDATE_CHECK_REQ;
+    return TRUE;
+//
 //	if (m_pSocket->writen(m_pSendBuffer, len) != len)
 //		return FALSE;
 //	len = m_pSocket->read(m_pSendBuffer, 1400);
@@ -191,6 +207,40 @@
             [[Config shareInstance] PLOG:@"NSStreamEventOpenCompleted !"];
             break;
         case NSStreamEventHasBytesAvailable:
+        {
+            // read
+            NSInteger readed    =   [self.iStream read:_readBuffer maxLength:_bufferLen];
+            switch (self.curReqType) {
+                case REQ_UPDATE_CHECK_REQ:
+                {
+                    NSString* errorStr  =   nil;
+                    do {
+                        if(readed < c_pkg_head_len)
+                        {
+                            errorStr    =   @"received len:%d < pakage head len!";
+                            break;
+                        }
+                        if (CheckPkgHead(_readBuffer, readed) != REQ_UPDATE_ACK) {
+                            errorStr    =   @"received pasre error!";
+                            break;
+                        }
+                        STU_UPDATE_CHECK_ACK* req = (STU_UPDATE_CHECK_ACK*)(_readBuffer+sizeof(STU_PACKAGE_HEADER));
+                        self.askUpdateBlock(TRUE,req->nResult,req->nResult,req->dwBytes);
+                    } while (0);
+                    if (errorStr) {
+                        [[Config shareInstance] PLOG:@"%@",errorStr];
+                        self.askUpdateBlock(FALSE,FALSE,0,0);
+                    }
+                }
+                    break;
+                    
+                default:
+                    [[Config shareInstance] PLOG:@"received data len:%d,but how to parse?",readed];
+                    break;
+            }
+            self.curReqType =   NONE_REU_TYPE;
+            
+        }
             break;
         case NSStreamEventHasSpaceAvailable:
             break;
