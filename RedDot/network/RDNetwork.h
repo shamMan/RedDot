@@ -13,6 +13,12 @@
 typedef void (^AskUpdateRequestBlock) (BOOL bNeedUpdate,int pkgSize,int totalSize);
 
 @interface RDNetwork : NSObject
+{
+    @private
+    int  _bufferLen;
+    unsigned char* _readBuffer;
+    unsigned char* _writeBuffer;
+}
 @property (readonly) BOOL connect;
 @property (copy,nonatomic) AskUpdateRequestBlock askUpdateBlock;
 
@@ -21,5 +27,5 @@ typedef void (^AskUpdateRequestBlock) (BOOL bNeedUpdate,int pkgSize,int totalSiz
 -(BOOL)connectToServer;
 -(BOOL)close;
 // 升级查询
--(BOOL)checkUpdateWithHardType:(unsigned int)haderType andSoftVersion:(unsigned int)softVersion andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block;
+-(BOOL)checkUpdateWithHardType:(NSString*)hardwareType andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block;
 @end
