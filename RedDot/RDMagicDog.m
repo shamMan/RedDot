@@ -104,7 +104,8 @@
 // 获取升级详细
 -(BOOL)askUpdateDetail:(DogGeneralCommandBlock) block
 {
-    NSString* command   =   [NSString stringWithFormat:@"UPDATAREG-%@",[self now]];
+    //NSString* command   =   [NSString stringWithFormat:@"UPDATAREG-%@",[self now]];
+    NSString* command   =   @"UPDATAREG-20140113162212";
     [self writeStr:command];
     self.commandBlock   =   block;
     _lastCommand    =   DogCommandAdkUpdate;
@@ -118,11 +119,14 @@
 // 定位
 -(BOOL)openNMEAEN
 {
+    [self writeStr:@"NMEAEN"];
+    _lastCommand    =   DogCommandNMEA;
     return TRUE;
 }
 // 定位
 -(BOOL)closeNMEAEN
 {
+    [self writeStr:@"NMEADIS"];
     return TRUE;
 }
 // 路况
@@ -136,7 +140,8 @@
     NSString* str   =   nil;
     switch (key) {
         case MagicDogKeyTypeMode:
-            str =   @"MODEKEY";
+            //str =   @"MODEKEY";
+            str     =   @"UPDATAREG-20140113162212";
             break;
         case MagicDogKeyTypeUp:
             str =   @"UPKEY";
@@ -296,7 +301,7 @@
 {
     NSString *value = [[[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] autorelease];
     NSLog(@"Value %@",value);
-    [[Config shareInstance] PLOG:@"%s %@ value:%@",__func__,error,value];
+    [[Config shareInstance] PLOG:@"%s %@ char:%@ value:%@",__func__,error,characteristic,value];
     switch (self.lastCommand) {
         case DogCommandHandShake:
         {
@@ -326,6 +331,10 @@
         case DogCommandAdkUpdate:
         {
             
+            break;
+        }
+        case DogCommandNMEA:
+        {
             break;
         }
         default:

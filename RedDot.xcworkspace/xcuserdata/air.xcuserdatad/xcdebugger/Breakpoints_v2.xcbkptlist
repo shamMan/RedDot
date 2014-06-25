@@ -162,28 +162,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RedDot/RDMainVC.m"
-            timestampString = "425137863.854617"
+            timestampString = "425396446.802136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-dog:statusChanged:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RedDot/RDMagicDog.m"
-            timestampString = "425137978.211281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "-peripheral:didUpdateValueForCharacteristic:error:"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-askDogDetail"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

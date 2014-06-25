@@ -149,16 +149,22 @@
 // 检测蓝牙版本信息
 - (void)askDogDetail
 {
+    __block RDMagicDog* weakDog =   _dog;
     [_dog askUpdateDetail:^(BOOL bSuccess) {
         if (bSuccess) {
             // 成功，打印下
-            
+            [[Config shareInstance] PLOG:@"%@",weakDog];
         }
         else
         {
             // 蓝牙连接失败
         }
     }];
+}
+
+-(void)startLocate
+{
+    [_dog openNMEAEN];
 }
 
 - (void)askMode
@@ -169,6 +175,7 @@
             weakSelf.btnControl.enabled =   TRUE;
             // 准备升级检查
             [self performSelector:@selector(askDogDetail) withObject:nil afterDelay:0.1];
+            //[self performSelector:@selector(startLocate) withObject:nil afterDelay:0.1];
         }
         else
         {

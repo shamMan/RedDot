@@ -44,7 +44,8 @@ typedef NS_ENUM(NSUInteger, DogStatus) {
 typedef NS_ENUM(NSUInteger, DogCommand) {
     DogCommandUnknow,
     DogCommandHandShake,        //  握手
-    DogCommandAdkUpdate         //  升级信息
+    DogCommandAdkUpdate,        //  升级信息
+    DogCommandNMEA              //  输出定位信息
 };
 
 @class RDMagicDog;
