@@ -183,7 +183,6 @@
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
 		45A87B5E195859550000A2D1 /* dogDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dogDefine.h; sourceTree = "<group>"; };
 		45B84609194F20EC00909937 /* dogDefine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dogDefine.c; sourceTree = "<group>"; };
-		45B8460A194F20EC00909937 /* IncUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncUpdater.h; sourceTree = "<group>"; };
 		45B8460C194F20EC00909937 /* AutoLock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoLock.cpp; sourceTree = "<group>"; };
 		45B8460D194F20EC00909937 /* AutoLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLock.h; sourceTree = "<group>"; };
 		45B8460E194F20EC00909937 /* DataStruct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStruct.cpp; sourceTree = "<group>"; };
@@ -496,7 +495,6 @@
 			children = (
 				45A87B5E195859550000A2D1 /* dogDefine.h */,
 				45B84609194F20EC00909937 /* dogDefine.c */,
-				45B8460A194F20EC00909937 /* IncUpdater.h */,
 				45B8460B194F20EC00909937 /* Utilities */,
 			);
 			path = RDDemoUpdater;

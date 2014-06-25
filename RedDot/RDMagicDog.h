@@ -10,9 +10,21 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLHeading.h>
+#import "dogDefine.h"
 
 // Define Block
 typedef void (^DogGeneralCommandBlock) (BOOL bSuccess);
+
+///< 蓝牙详细信息结构体
+typedef struct{
+	UINT8   ASK_UPDATE_HEAD[8];		//包头 ASUPDATE
+	UINT32  DATEDATA;				//基础数据日期
+	UINT16  HARDWAREID;             //硬件ID
+    UINT8   SERNO[10];	        	//序列号
+	UINT8	APPVERSION;				//固件版本号
+	UINT8   CAMERADARA_VER[4];		//软件版本
+	UINT8   RESERVED[3];			//预留
+}STU_ASK_UPDATE;
 
 typedef NS_ENUM(NSUInteger,MagicDogKeyType)
 {
@@ -31,7 +43,8 @@ typedef NS_ENUM(NSUInteger, DogStatus) {
 
 typedef NS_ENUM(NSUInteger, DogCommand) {
     DogCommandUnknow,
-    DogCommandAskMode      //  握手
+    DogCommandHandShake,        //  握手
+    DogCommandAdkUpdate         //  升级信息
 };
 
 @class RDMagicDog;
@@ -52,14 +65,17 @@ typedef NS_ENUM(NSUInteger, DogCommand) {
 @property (assign,nonatomic) DogStatus          status;
 @property (readonly, nonatomic) DogCommand      lastCommand;
 // 型号,Connect 后可用
-@property (readonly,nonatomic) NSString*    modename;
-
+@property (readonly,nonatomic) NSString*        modename;
+// 升级详细信息
+@property (readonly,nonatomic) STU_ASK_UPDATE   stu_ask_update;
 // TEST
 @property (retain,nonatomic) CBCharacteristic*  writeChar;
 
 +(RDMagicDog*)linkDogWithDelegate:(id<DogDelegate>)delegate;
-// 获取版本
--(BOOL)askModeWithCompleteBlock:(DogGeneralCommandBlock) block;
+// 握手
+-(BOOL)shakeHand:(DogGeneralCommandBlock) block;
+// 获取升级详细
+-(BOOL)askUpdateDetail:(DogGeneralCommandBlock) block;
 // 升级
 -(BOOL)updateMap;
 // 定位

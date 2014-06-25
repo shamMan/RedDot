@@ -146,12 +146,29 @@
     //[network connectToServer];
 }
 
+// 检测蓝牙版本信息
+- (void)askDogDetail
+{
+    [_dog askUpdateDetail:^(BOOL bSuccess) {
+        if (bSuccess) {
+            // 成功，打印下
+            
+        }
+        else
+        {
+            // 蓝牙连接失败
+        }
+    }];
+}
+
 - (void)askMode
 {
-    [_dog askModeWithCompleteBlock:^(BOOL bSuccess) {
+    __block RDMainVC* weakSelf    = self;
+    [_dog shakeHand:^(BOOL bSuccess) {
         if (bSuccess) {
-            // 开始连接服务器检查版本
-            self.btnControl.enabled =   TRUE;
+            weakSelf.btnControl.enabled =   TRUE;
+            // 准备升级检查
+            [self performSelector:@selector(askDogDetail) withObject:nil afterDelay:0.1];
         }
         else
         {

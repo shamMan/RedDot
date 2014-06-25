@@ -9,8 +9,6 @@ static const int c_pkg_head_len =   6;
 @interface RDNetwork()<NSStreamDelegate>
 @property (retain,nonatomic) NSInputStream* iStream;
 @property (retain,nonatomic) NSOutputStream* oStream;
-// 获取当前日期，返回 20120221
--(unsigned int)now;
 @end
 
 @implementation RDNetwork
@@ -33,22 +31,8 @@ static const int c_pkg_head_len =   6;
     _bufferLen  =   1400;
     _readBuffer     =   (unsigned char*)malloc(_bufferLen);
     _writeBuffer    =   (unsigned char*)malloc(_bufferLen);
-    
+    self.seqNo      =   @"000000000000";
     return self;
-}
--(unsigned int)now
-{
-    unsigned int ret    =   0;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *now =   [NSDate date];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *comps = [calendar components:unitFlags fromDate:now];
-    NSInteger year    = [comps year];
-    NSInteger month   = [comps month];
-    NSInteger day     = [comps day];
-    // 20140221
-    ret =   year * 10000 + month * 100 + day;
-    return ret;
 }
 -(BOOL)close
 {
@@ -112,16 +96,18 @@ static const int c_pkg_head_len =   6;
 {
     [_iStream release];
     [_oStream release];
+    [_seqNo release];
     if (_readBuffer) {
         free(_readBuffer);
     }
     if (_writeBuffer) {
         free(_writeBuffer);
     }
+    
     [super dealloc];
 }
 #pragma mark -- 公开请求
--(BOOL)checkUpdateWithHardType:(NSString*)hardwareType andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block
+-(BOOL)checkUpdateWithHardType:(NSString*)hardwareType andDate:(unsigned int)date andLocation:(CLLocation*)location andBlock:(AskUpdateRequestBlock) block
 {
     if (![self.oStream hasSpaceAvailable]) {
         [[Config shareInstance] PLOG:@"checkUpdateWithHardType Failed,because of ostream not ready"];
@@ -129,7 +115,7 @@ static const int c_pkg_head_len =   6;
     }
     self.askUpdateBlock =   block;
     // 序列号，固件本版，硬件版本 等未启用参数
-    const char* _serNo  =   "000000000000";
+    const char* serNo  =   [self.seqNo UTF8String];
     INT32   _SWVer  =   0;
     INT32   _HWVer  =   0;
     int _HWTypeLen  =   hardwareType.length;
@@ -144,11 +130,11 @@ static const int c_pkg_head_len =   6;
     STU_PACKAGE_HEADER* header = (STU_PACKAGE_HEADER*)_writeBuffer;
 	STU_UPDATE_CHECK_REQ* req = (STU_UPDATE_CHECK_REQ*)(_writeBuffer + sizeof(STU_PACKAGE_HEADER));
 	memset(req, 0, sizeof(STU_UPDATE_CHECK_REQ));
-	memcpy(req->SerNo,_serNo,12);
+	memcpy(req->SerNo,serNo,12);
 	memcpy(req->HWType,_HWType,_HWTypeLen);
 	req->FWVer      =   _SWVer;					//固件版本
 	req->HWVer      =   _HWVer;					//硬件版本
-	req->DataTime   =   [self now];             //最新数据日期
+	req->DataTime   =   date;                   //最新数据日期
 	req->nStartLatitude =   0;					//当前最新数据的起始点纬度，单位为度；
 	req->nStartLongitude=   0;					//当前最新数据的起始点经度，单位为度；
 	req->nEndLatitude   =   0;					//当前最新数据的结束点纬度，单位为度；
@@ -165,27 +151,67 @@ static const int c_pkg_head_len =   6;
     NSInteger writed  =   [self.oStream write:_writeBuffer maxLength:len];
     if (writed != len)
     {
-        NSLog(@"ostream write failed,need:%d writed:%lu",len,writed);
+        NSLog(@"ostream write failed,need:%d writed:%d",len,writed);
         return FALSE;
     }
     self.curReqType =   REQ_UPDATE_CHECK_REQ;
     return TRUE;
-//
-//	if (m_pSocket->writen(m_pSendBuffer, len) != len)
-//		return FALSE;
-//	len = m_pSocket->read(m_pSendBuffer, 1400);
-//	if (len < 6 || CheckPkgHead(m_pSendBuffer, len) != REQ_UPDATE_CHECK_ACK)
-//	{
-//		return FALSE;
-//	}
-//	STU_UPDATE_CHECK_ACK ack;
-//	memcpy((UINT8*)&ack,m_pSendBuffer+sizeof(STU_PACKAGE_HEADER),sizeof(ack));
-//	if (ack.nResult == 0)
-//		return FALSE;
-//    
-//	m_dwUpdateBytes = ack.dwBytes;
-	
-	return TRUE;
+}
+
+-(BOOL)fetchUpdateByPakageIndex:(int)index andIsFinall:(BOOL)bEnd andBlock:(FetchUpdateRequestBlock) block
+{
+    if (![self.oStream hasSpaceAvailable]) {
+        [[Config shareInstance] PLOG:@"checkUpdateWithHardType Failed,because of ostream not ready"];
+        return FALSE;
+    }
+    self.fetchUpdateBlock =   block;
+    STU_PACKAGE_HEADER* header = (STU_PACKAGE_HEADER*)_writeBuffer;
+	STU_UPDATE_REQ* req     =   (STU_UPDATE_REQ*)(_writeBuffer + sizeof(STU_PACKAGE_HEADER));
+	memset(req, 0, sizeof(STU_UPDATE_REQ));
+	req->nPktIndex      = index;
+	req->nPackSize      = 1024;
+	req->nLastPacket    = bEnd;
+	header->nReq        = REQ_UPDATE_REQ;
+	SetPkgHead(header, (UINT8*)req, sizeof(STU_UPDATE_REQ));
+	int len = sizeof(STU_PACKAGE_HEADER) + sizeof(STU_UPDATE_REQ);
+    NSInteger writed  =   [self.oStream write:_writeBuffer maxLength:len];
+    if (writed != len)
+    {
+        NSLog(@"ostream write failed,need:%d writed:%d",len,writed);
+        return FALSE;
+    }
+    self.curReqType     =   REQ_UPDATE_REQ;
+    return TRUE;
+}
+-(BOOL)reportPoiAddOrDelete:(BOOL)bIsAdd atLocation:(CLLocation*)location andDirect:(int)dir andBlock:(ReportPoiRequestBlock) block
+{
+    if (![self.oStream hasSpaceAvailable]) {
+        [[Config shareInstance] PLOG:@"checkUpdateWithHardType Failed,because of ostream not ready"];
+        return FALSE;
+    }
+    self.reportPoiBlock =   block;
+    STU_PACKAGE_HEADER* header  = (STU_PACKAGE_HEADER*)_writeBuffer;
+	STU_POI_UPLOAD_REQ* req     = (STU_POI_UPLOAD_REQ*)(_writeBuffer + sizeof(STU_POI_UPDATE_REQ));
+	memset(req, 0, sizeof(STU_UPDATE_REQ));
+    // 位置
+    UINT16  _RMCLatitude =   location.coordinate.latitude * 100;
+    UINT16  _RMCLongitude=   location.coordinate.longitude * 100;
+	req->nPtLatitude    = _RMCLatitude;
+	req->nPtLongitude   = _RMCLongitude;
+	req->angle          = dir;
+	req->voiceID        = 0;
+    req->flag           = bIsAdd;
+	header->nReq        = REQ_POI_UPLOAD_REQ;
+	SetPkgHead(header, (UINT8*)req, sizeof(STU_POI_UPLOAD_REQ));
+	int len = sizeof(STU_PACKAGE_HEADER) + sizeof(STU_POI_UPLOAD_REQ);
+    NSInteger writed  =   [self.oStream write:_writeBuffer maxLength:len];
+    if (writed != len)
+    {
+        NSLog(@"ostream write failed,need:%d writed:%d",len,writed);
+        return FALSE;
+    }
+    self.curReqType     =   REQ_POI_UPLOAD_REQ;
+    return TRUE;
 }
 
 #pragma mark -- NSStreamDelegate
@@ -209,31 +235,34 @@ static const int c_pkg_head_len =   6;
         case NSStreamEventHasBytesAvailable:
         {
             // read
+            //NSString* errorStr  =   nil;
             NSInteger readed    =   [self.iStream read:_readBuffer maxLength:_bufferLen];
-            switch (self.curReqType) {
+            NSAssert(readed > c_pkg_head_len, @"iStream received pakage len < head len!");
+            int readedType  =   CheckPkgHead(_readBuffer, readed);
+            NSAssert(_curReqType == readedType, @"iStream received type not match!");
+            unsigned char* pContent =   _readBuffer + sizeof(STU_PACKAGE_HEADER);
+            switch (self.curReqType)
+            {
                 case REQ_UPDATE_CHECK_REQ:
                 {
-                    NSString* errorStr  =   nil;
-                    do {
-                        if(readed < c_pkg_head_len)
-                        {
-                            errorStr    =   @"received len:%d < pakage head len!";
-                            break;
-                        }
-                        if (CheckPkgHead(_readBuffer, readed) != REQ_UPDATE_ACK) {
-                            errorStr    =   @"received pasre error!";
-                            break;
-                        }
-                        STU_UPDATE_CHECK_ACK* req = (STU_UPDATE_CHECK_ACK*)(_readBuffer+sizeof(STU_PACKAGE_HEADER));
-                        self.askUpdateBlock(TRUE,req->nResult,req->nResult,req->dwBytes);
-                    } while (0);
-                    if (errorStr) {
-                        [[Config shareInstance] PLOG:@"%@",errorStr];
-                        self.askUpdateBlock(FALSE,FALSE,0,0);
-                    }
-                }
+                    STU_UPDATE_CHECK_ACK* req = (STU_UPDATE_CHECK_ACK*)pContent;
+                    self.askUpdateBlock(TRUE,req->nResult,req->nResult,req->dwBytes);
                     break;
-                    
+                }
+                case REQ_UPDATE_REQ:
+                {
+                    STU_UPDATE_REQ* req = (STU_UPDATE_REQ*)pContent;
+                    unsigned char* realData =   pContent + sizeof(STU_UPDATE_REQ);
+                    self.fetchUpdateBlock(TRUE,req->nPktIndex,realData,1024);
+                    break;
+                }
+                case REQ_POI_UPLOAD_REQ:
+                {
+                    STU_POI_UPLOAD_CHK_ACK* req = (STU_POI_UPLOAD_CHK_ACK*)pContent;
+                    BOOL success =  (req->result == 0)?TRUE:FALSE;
+                    self.reportPoiBlock(success);
+                    break;
+                }
                 default:
                     [[Config shareInstance] PLOG:@"received data len:%d,but how to parse?",readed];
                     break;

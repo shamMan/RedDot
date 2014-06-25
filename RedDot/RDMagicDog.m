@@ -14,9 +14,19 @@
 -(BOOL)foundAndConnect;
 -(BOOL)cleanUp;
 -(BOOL)writeStr:(NSString*)str;
+-(NSString*)now;
 @end
 
 @implementation RDMagicDog
+
+-(NSString*)now
+{
+    NSString* date;
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc]init] autorelease];
+    [formatter setDateFormat:@"YYYYMMddhhmmss"];
+    date = [formatter stringFromDate:[NSDate date]];
+    return date;
+}
 
 +(RDMagicDog*)linkDogWithDelegate:(id<DogDelegate>)delegate;
 {
@@ -37,6 +47,7 @@
 {
     self =  [super init];
     if (self) {
+        memset(&_stu_ask_update, 0, sizeof(STU_ASK_UPDATE));
 		_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
 	}
     return self;
@@ -83,11 +94,20 @@
     [self.peripheral writeValue:aData forCharacteristic:self.writeChar type:CBCharacteristicWriteWithoutResponse];
     return TRUE;
 }
--(BOOL)askModeWithCompleteBlock:(DogGeneralCommandBlock) block;
+-(BOOL)shakeHand:(DogGeneralCommandBlock) block;
 {
     [self writeStr:@"Ego"];
     self.commandBlock   =   block;
-    _lastCommand    =   DogCommandAskMode;
+    _lastCommand    =   DogCommandHandShake;
+    return TRUE;
+}
+// 获取升级详细
+-(BOOL)askUpdateDetail:(DogGeneralCommandBlock) block
+{
+    NSString* command   =   [NSString stringWithFormat:@"UPDATAREG-%@",[self now]];
+    [self writeStr:command];
+    self.commandBlock   =   block;
+    _lastCommand    =   DogCommandAdkUpdate;
     return TRUE;
 }
 // 升级
@@ -274,11 +294,11 @@
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSString *value = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    NSString *value = [[[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] autorelease];
     NSLog(@"Value %@",value);
     [[Config shareInstance] PLOG:@"%s %@ value:%@",__func__,error,value];
     switch (self.lastCommand) {
-        case DogCommandAskMode:
+        case DogCommandHandShake:
         {
             // SF4201-CONNECT
             if ([value hasSuffix:@"-CONNECT\r\n"]) {
@@ -288,11 +308,26 @@
             }
             else
             {
-                self.commandBlock(FALSE);
+                int len     =   characteristic.value.length;
+                const void* data =   characteristic.value.bytes;
+                if (!data || len < sizeof(STU_ASK_UPDATE)) {
+                    [[Config shareInstance] PLOG:@"查询蓝牙信息返回长度不够:%d",len];
+                    self.commandBlock(FALSE);
+                }
+                else
+                {
+                    STU_ASK_UPDATE* req =   (STU_ASK_UPDATE*)data;
+                    _stu_ask_update =   *req;
+                    self.commandBlock(TRUE);
+                }
             }
         }
             break;
+        case DogCommandAdkUpdate:
+        {
             
+            break;
+        }
         default:
             break;
     }
@@ -317,6 +352,12 @@
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
     [[Config shareInstance] PLOG:@"%s %@",__func__,error];
+}
+
+- (NSString*)debugDescription
+{
+    NSString* ret   =   [NSString stringWithFormat:@"DUMP RDMagicDog:\n Mode=%@ \n 基础数据日期:%d \n 硬件ID:%d \n 序列号:%s \n 固件版本:%d \n 软件版本:%s \n ",_modename,_stu_ask_update.DATEDATA,_stu_ask_update.HARDWAREID,_stu_ask_update.SERNO,_stu_ask_update.APPVERSION,_stu_ask_update.CAMERADARA_VER];
+    return ret;
 }
 
 @end
