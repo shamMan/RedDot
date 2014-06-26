@@ -130,8 +130,11 @@
     return TRUE;
 }
 // 路况
--(BOOL)startScanRoadInfo
+-(BOOL)roadInfo:(DogGeneralCommandBlock) block
 {
+    [self writeStr:@"ROADKEY"];
+    self.commandBlock   =   block;
+    _lastCommand    =   DogCommandRoadInfo;
     return TRUE;
 }
 // 按键
@@ -159,8 +162,11 @@
     return TRUE;
 }
 // 投诉
--(BOOL)POI
+-(BOOL)POI:(DogGeneralCommandBlock) block;
 {
+    [self writeStr:@"POIKEY"];
+    self.commandBlock   =   block;
+    _lastCommand    =   DogCommandPoi;
     return TRUE;
 }
 // 播放TTS
@@ -335,6 +341,15 @@
         }
         case DogCommandNMEA:
         {
+            break;
+        }
+        case DogCommandPoi:
+        case DogCommandRoadInfo:
+        {
+            if ([value compare:@"STU_BLUETOOTH_GPS"] == 0)
+                self.commandBlock(TRUE);
+            else
+                self.commandBlock(TRUE);
             break;
         }
         default:

@@ -43,9 +43,11 @@ typedef NS_ENUM(NSUInteger, DogStatus) {
 
 typedef NS_ENUM(NSUInteger, DogCommand) {
     DogCommandUnknow,
-    DogCommandHandShake,        //  握手
-    DogCommandAdkUpdate,        //  升级信息
-    DogCommandNMEA              //  输出定位信息
+    DogCommandHandShake,        // 握手
+    DogCommandAdkUpdate,        // 升级信息
+    DogCommandNMEA,             // 输出定位信息
+    DogCommandPoi,              // 投诉
+    DogCommandRoadInfo          // 路况
 };
 
 @class RDMagicDog;
@@ -79,16 +81,16 @@ typedef NS_ENUM(NSUInteger, DogCommand) {
 -(BOOL)askUpdateDetail:(DogGeneralCommandBlock) block;
 // 升级
 -(BOOL)updateMap;
-// 定位
+// 开启定位
 -(BOOL)openNMEAEN;
-// 定位
+// 关闭定位
 -(BOOL)closeNMEAEN;
 // 路况
--(BOOL)startScanRoadInfo;
-// 按键
+-(BOOL)roadInfo:(DogGeneralCommandBlock) block;
+// 按键（遥控器）
 -(BOOL)SendVirtualKey:(MagicDogKeyType)key;
 // 投诉
--(BOOL)POI;
+-(BOOL)POI:(DogGeneralCommandBlock) block;
 // 播放TTS
 -(BOOL)playTTS;
 
