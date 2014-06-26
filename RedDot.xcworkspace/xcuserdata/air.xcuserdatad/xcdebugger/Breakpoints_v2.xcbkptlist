@@ -162,11 +162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RedDot/RDMainVC.m"
-            timestampString = "425396446.802136"
+            timestampString = "425485711.022316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-askDogDetail"
             landmarkType = "5">
          </BreakpointContent>

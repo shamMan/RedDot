@@ -31,7 +31,8 @@ typedef NS_ENUM(NSUInteger,MagicDogKeyType)
     MagicDogKeyTypeUp   =   0,
     MagicDogKeyTypeDown,
     MagicDogKeyTypeMode,
-    MagicDogKeyTypeMute
+    MagicDogKeyTypeMute,
+    MagicDogKeyTypeRoad
 };
 
 typedef NS_ENUM(NSUInteger, DogStatus) {

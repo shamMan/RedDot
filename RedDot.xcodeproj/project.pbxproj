@@ -83,6 +83,21 @@
 		4502841C19568F7A00EF1D29 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4502841B19568F7A00EF1D29 /* AudioToolbox.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
+		458DA128195C52EB00F80555 /* RDBLEControlVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */; };
+		458DA129195C52EB00F80555 /* RDBLEControlVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */; };
+		458DA134195C56D500F80555 /* img_minus_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12A195C56D500F80555 /* img_minus_d.png */; };
+		458DA135195C56D500F80555 /* img_minus_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12B195C56D500F80555 /* img_minus_u.png */; };
+		458DA136195C56D500F80555 /* img_mode_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12C195C56D500F80555 /* img_mode_d.png */; };
+		458DA137195C56D500F80555 /* img_mode_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12D195C56D500F80555 /* img_mode_u.png */; };
+		458DA138195C56D500F80555 /* img_reset_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12E195C56D500F80555 /* img_reset_normal.png */; };
+		458DA139195C56D500F80555 /* img_reset_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA12F195C56D500F80555 /* img_reset_press.png */; };
+		458DA13A195C56D500F80555 /* img_road_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA130195C56D500F80555 /* img_road_d.png */; };
+		458DA13B195C56D500F80555 /* img_road_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA131195C56D500F80555 /* img_road_u.png */; };
+		458DA13C195C56D500F80555 /* img_sound_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA132195C56D500F80555 /* img_sound_d.png */; };
+		458DA13D195C56D500F80555 /* img_sound_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA133195C56D500F80555 /* img_sound_u.png */; };
+		458DA13F195C56E300F80555 /* black_bk.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA13E195C56E300F80555 /* black_bk.png */; };
+		458DA142195C584500F80555 /* img_add_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA140195C584500F80555 /* img_add_d.png */; };
+		458DA143195C584500F80555 /* img_add_u.png in Resources */ = {isa = PBXBuildFile; fileRef = 458DA141195C584500F80555 /* img_add_u.png */; };
 		45B8461B194F20EC00909937 /* dogDefine.c in Sources */ = {isa = PBXBuildFile; fileRef = 45B84609194F20EC00909937 /* dogDefine.c */; };
 		45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460C194F20EC00909937 /* AutoLock.cpp */; };
 		45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B8460E194F20EC00909937 /* DataStruct.cpp */; };
@@ -273,6 +288,22 @@
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
+		458DA125195C52EB00F80555 /* RDBLEControlVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBLEControlVCViewController.h; sourceTree = "<group>"; };
+		458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDBLEControlVCViewController.m; sourceTree = "<group>"; };
+		458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RDBLEControlVCViewController.xib; sourceTree = "<group>"; };
+		458DA12A195C56D500F80555 /* img_minus_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_minus_d.png; path = Res/img_minus_d.png; sourceTree = "<group>"; };
+		458DA12B195C56D500F80555 /* img_minus_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_minus_u.png; path = Res/img_minus_u.png; sourceTree = "<group>"; };
+		458DA12C195C56D500F80555 /* img_mode_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_mode_d.png; path = Res/img_mode_d.png; sourceTree = "<group>"; };
+		458DA12D195C56D500F80555 /* img_mode_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_mode_u.png; path = Res/img_mode_u.png; sourceTree = "<group>"; };
+		458DA12E195C56D500F80555 /* img_reset_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_reset_normal.png; path = Res/img_reset_normal.png; sourceTree = "<group>"; };
+		458DA12F195C56D500F80555 /* img_reset_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_reset_press.png; path = Res/img_reset_press.png; sourceTree = "<group>"; };
+		458DA130195C56D500F80555 /* img_road_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_road_d.png; path = Res/img_road_d.png; sourceTree = "<group>"; };
+		458DA131195C56D500F80555 /* img_road_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_road_u.png; path = Res/img_road_u.png; sourceTree = "<group>"; };
+		458DA132195C56D500F80555 /* img_sound_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_sound_d.png; path = Res/img_sound_d.png; sourceTree = "<group>"; };
+		458DA133195C56D500F80555 /* img_sound_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_sound_u.png; path = Res/img_sound_u.png; sourceTree = "<group>"; };
+		458DA13E195C56E300F80555 /* black_bk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = black_bk.png; path = Res/black_bk.png; sourceTree = "<group>"; };
+		458DA140195C584500F80555 /* img_add_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_add_d.png; path = Res/img_add_d.png; sourceTree = "<group>"; };
+		458DA141195C584500F80555 /* img_add_u.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_add_u.png; path = Res/img_add_u.png; sourceTree = "<group>"; };
 		45A87B5E195859550000A2D1 /* dogDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dogDefine.h; sourceTree = "<group>"; };
 		45B84609194F20EC00909937 /* dogDefine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dogDefine.c; sourceTree = "<group>"; };
 		45B8460C194F20EC00909937 /* AutoLock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoLock.cpp; sourceTree = "<group>"; };
@@ -428,6 +459,19 @@
 		047049381936C53800182A69 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				458DA12A195C56D500F80555 /* img_minus_d.png */,
+				458DA140195C584500F80555 /* img_add_d.png */,
+				458DA141195C584500F80555 /* img_add_u.png */,
+				458DA13E195C56E300F80555 /* black_bk.png */,
+				458DA12B195C56D500F80555 /* img_minus_u.png */,
+				458DA12C195C56D500F80555 /* img_mode_d.png */,
+				458DA12D195C56D500F80555 /* img_mode_u.png */,
+				458DA12E195C56D500F80555 /* img_reset_normal.png */,
+				458DA12F195C56D500F80555 /* img_reset_press.png */,
+				458DA130195C56D500F80555 /* img_road_d.png */,
+				458DA131195C56D500F80555 /* img_road_u.png */,
+				458DA132195C56D500F80555 /* img_sound_d.png */,
+				458DA133195C56D500F80555 /* img_sound_u.png */,
 				040A9E00195C17FC0020304F /* alarm_bk.png */,
 				45D0BD3A1951C1C30025060B /* remote_control_d.png */,
 				45D0BD3B1951C1C30025060B /* remote_control_u.png */,
@@ -588,6 +632,9 @@
 				047049811937005700182A69 /* RDMapVC.h */,
 				047049821937005700182A69 /* RDMapVC.m */,
 				047049831937005700182A69 /* RDMapVC.xib */,
+				458DA125195C52EB00F80555 /* RDBLEControlVCViewController.h */,
+				458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */,
+				458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -742,20 +789,26 @@
 				45D0BD331951C1BB0025060B /* control_plus_d.png in Resources */,
 				45D0BD361951C1BB0025060B /* data_u.png in Resources */,
 				45D0BD301951C1BB0025060B /* control_mid_u.png in Resources */,
+				458DA138195C56D500F80555 /* img_reset_normal.png in Resources */,
+				458DA139195C56D500F80555 /* img_reset_press.png in Resources */,
 				45D0BD2D1951C1BB0025060B /* compass_d.png in Resources */,
 				45D0BD4B1951C9960025060B /* compass2.png in Resources */,
 				45D0BD411951C1C30025060B /* remote_control_d.png in Resources */,
+				458DA137195C56D500F80555 /* img_mode_u.png in Resources */,
 				45D0BD461951C1C30025060B /* switch_d.png in Resources */,
 				45D0BD421951C1C30025060B /* remote_control_u.png in Resources */,
+				458DA129195C52EB00F80555 /* RDBLEControlVCViewController.xib in Resources */,
 				45D0BD381951C1BB0025060B /* delete_u.png in Resources */,
 				45D0BD2A1951C1BB0025060B /* bg.png in Resources */,
 				047049301936C4EE00182A69 /* Default@2x.png in Resources */,
 				45D0BD471951C1C30025060B /* switch_u.png in Resources */,
 				45D0BD371951C1BB0025060B /* delete_d.png in Resources */,
+				458DA136195C56D500F80555 /* img_mode_d.png in Resources */,
 				45D0BD321951C1BB0025060B /* control_minus_u.png in Resources */,
 				45D0BD451951C1C30025060B /* setting_u.png in Resources */,
 				45D0BD311951C1BB0025060B /* control_minus_d.png in Resources */,
 				047049321936C4EE00182A69 /* Default-568h@2x.png in Resources */,
+				458DA13B195C56D500F80555 /* img_road_u.png in Resources */,
 				45D0BD2F1951C1BB0025060B /* control_mid_d.png in Resources */,
 				45D0BD2E1951C1BB0025060B /* compass_u.png in Resources */,
 				45D0BD4A1951C9960025060B /* compass1.png in Resources */,
@@ -780,8 +833,10 @@
 				040A9E31195C1A2D0020304F /* icon_1_6.png in Resources */,
 				040A9E32195C1A2D0020304F /* icon_1_7.png in Resources */,
 				040A9E33195C1A2D0020304F /* icon_2_03.png in Resources */,
+				458DA135195C56D500F80555 /* img_minus_u.png in Resources */,
 				040A9E34195C1A2D0020304F /* icon_2_05.png in Resources */,
 				040A9E35195C1A2D0020304F /* icon_2_07.png in Resources */,
+				458DA13A195C56D500F80555 /* img_road_d.png in Resources */,
 				040A9E36195C1A2D0020304F /* icon_2_09.png in Resources */,
 				040A9E37195C1A2D0020304F /* icon_2_icon_05.png in Resources */,
 				040A9E38195C1A2D0020304F /* icon_2_icon_11.png in Resources */,
@@ -797,6 +852,7 @@
 				040A9E42195C1A2D0020304F /* icon_03_09_03.png in Resources */,
 				040A9E43195C1A2D0020304F /* icon_3_09.png in Resources */,
 				040A9E44195C1A2D0020304F /* icon_03.png in Resources */,
+				458DA143195C584500F80555 /* img_add_u.png in Resources */,
 				040A9E45195C1A2D0020304F /* icon_4_03.png in Resources */,
 				040A9E46195C1A2D0020304F /* icon_4_05.png in Resources */,
 				040A9E47195C1A2D0020304F /* icon_4_07.png in Resources */,
@@ -806,13 +862,18 @@
 				040A9E4B195C1A2D0020304F /* icon_5_05.png in Resources */,
 				040A9E4C195C1A2D0020304F /* icon_5_07.png in Resources */,
 				040A9E4D195C1A2D0020304F /* icon_05.png in Resources */,
+				458DA13D195C56D500F80555 /* img_sound_u.png in Resources */,
 				040A9E4E195C1A2D0020304F /* icon_07.png in Resources */,
 				040A9E4F195C1A2D0020304F /* icon_09.png in Resources */,
 				040A9E53195C1C5D0020304F /* icon_status_ble.png in Resources */,
 				040A9E54195C1C5D0020304F /* icon_status_sat.png in Resources */,
+				458DA13C195C56D500F80555 /* img_sound_d.png in Resources */,
 				040A9E55195C1C5D0020304F /* icon_status_cloud.png in Resources */,
 				040A9E59195C21120020304F /* icon_status_ble_on.png in Resources */,
+				458DA134195C56D500F80555 /* img_minus_d.png in Resources */,
 				040A9E5A195C21120020304F /* icon_status_cloud_on.png in Resources */,
+				458DA13F195C56E300F80555 /* black_bk.png in Resources */,
+				458DA142195C584500F80555 /* img_add_d.png in Resources */,
 				040A9E5B195C21120020304F /* icon_status_sat_on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -865,6 +926,7 @@
 				45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
 				451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */,
+				458DA128195C52EB00F80555 /* RDBLEControlVCViewController.m in Sources */,
 				45BCAA99193DFC0D0057623A /* BMKUserLocationEx.m in Sources */,
 				45B84621194F20EC00909937 /* Trace.cpp in Sources */,
 				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
@@ -955,6 +1017,8 @@
 			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = RedDot/RedDot.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
@@ -965,6 +1029,7 @@
 					"\"$(SRCROOT)/Libs\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -974,6 +1039,8 @@
 			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = RedDot/RedDot.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
@@ -983,7 +1050,9 @@
 					"\"$(SRCROOT)/Libs/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/Libs\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -11,9 +11,11 @@
 #import "RDBlueToothDeviceManager.h"
 #import "RDMagicDog.h"
 #import "RDInnerLocationService.h"
+#import "RDBLEControlVCViewController.h"
 
 
 @interface RDMainVC ()<DogDelegate>
+@property (retain, nonatomic) RDBLEControlVCViewController* bleCtrlVC;
 @end
 
 @implementation RDMainVC
@@ -61,6 +63,13 @@
     _localtionService   =   [[RDInnerLocationService alloc] init];
     _localtionService.delegate  =   self;
     [_localtionService startLocationService];
+    
+    [self addChildViewController:self.bleCtrlVC];
+    [self.view addSubview:self.bleCtrlVC.view];
+    int startPos    =   self.view.frame.size.height;
+    CGRect oldRc    =   self.bleCtrlVC.view.frame;
+    oldRc.origin.y  =   startPos;
+    self.bleCtrlVC.view.frame   =   oldRc;
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +81,9 @@
 
 - (void)dealloc
 {
+    [self.bleCtrlVC removeFromParentViewController];
+    [self.bleCtrlVC.view removeFromSuperview];
+    
     [_localtionService stopLocationService];
     [_localtionService release];
     [Config shareInstance].delegateD    =   nil;
@@ -80,6 +92,7 @@
     [_btnControl release];
     [_btnSetting release];
     [_mapVC release];
+    [_bleCtrlVC release];
     [_btnCtrlImageD release];
     [_btnCtrlImageU release];
     [_btnCtrlImageX release];
@@ -93,6 +106,9 @@
     [_compassView release];
     [_compassImageView release];
     [_speedLabel release];
+    [_stausViewSat release];
+    [_statusViewCloud release];
+    [_statusViewBle release];
     [super dealloc];
 }
 
@@ -107,6 +123,15 @@
 }
 
 #pragma mark - Getter & Setter
+-(RDBLEControlVCViewController*)bleCtrlVC
+{
+    if (!_bleCtrlVC) {
+        _bleCtrlVC  =   [[RDBLEControlVCViewController   alloc] initWithNibName:@"RDBLEControlVCViewController" bundle:nil];
+        _bleCtrlVC.mainVc   =   self;
+    }
+    return _bleCtrlVC;
+}
+
 - (RDMapVC*)mapVC
 {
     if (!_mapVC)
@@ -137,13 +162,46 @@
     }
 }
 
-- (IBAction)doDogControl:(id)sender {
-    [_dog SendVirtualKey:MagicDogKeyTypeMode];
-}
 
 - (IBAction)doSetting:(id)sender {
     //RDNetwork* network  =   [RDNetwork ShareInstance];
     //[network connectToServer];
+}
+
+// 打开遥控器窗口
+- (IBAction)doDogControl:(id)sender {
+    // 添加遥控器窗口
+    int startPos    =   self.view.frame.size.height;
+    CGRect oldRc    =   self.bleCtrlVC.view.frame;
+    oldRc.origin.y  =   startPos;
+    CGRect newRc    =   oldRc;
+    newRc.origin.y  =   startPos - 350;
+    self.bleCtrlVC.view.frame   =   oldRc;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bleCtrlVC.view.frame    =  newRc;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+// 关闭遥控器窗口
+- (void)closeCtrlView
+{
+    //
+    int startPos    =   self.view.frame.size.height;
+    CGRect oldRc    =   self.bleCtrlVC.view.frame;
+    CGRect newRc    =   oldRc;
+    newRc.origin.y  =   startPos;
+    self.bleCtrlVC.view.frame   =   oldRc;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bleCtrlVC.view.frame    =  newRc;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(BOOL)SendVirtualKey:(MagicDogKeyType)key
+{
+    return [_dog SendVirtualKey:key];
 }
 
 // 检测蓝牙版本信息
@@ -169,10 +227,9 @@
 
 - (void)askMode
 {
-    __block RDMainVC* weakSelf    = self;
+    //__block RDMainVC* weakSelf    = self;
     [_dog shakeHand:^(BOOL bSuccess) {
         if (bSuccess) {
-            weakSelf.btnControl.enabled =   TRUE;
             // 准备升级检查
             [self performSelector:@selector(askDogDetail) withObject:nil afterDelay:0.1];
             //[self performSelector:@selector(startLocate) withObject:nil afterDelay:0.1];
@@ -194,12 +251,17 @@
         case DogStatusConnected:
         {
             [self performSelector:@selector(askMode) withObject:nil afterDelay:0.3];
+            self.btnControl.enabled =   TRUE;
+            // 设置图片
+            self.statusViewBle.image    =   [UIImage imageNamed:@"icon_status_ble_on.png"];
+            
         }
             break;
         case DogStatusDisconnected:
         case DogStatusStatusError:
         {
             self.btnControl.enabled =   FALSE;
+            self.statusViewBle.image    =   [UIImage imageNamed:@"icon_status_ble.png"];
         }
             break;
         default:
@@ -249,8 +311,11 @@
             if(_curLocation)
             {
                 speedInKm =   _curLocation.speed * 60 / 1000.0;
+                if (speedInKm < 0.1) {
+                    speedInKm   =   0.0f;
+                }
             }
-            self.speedLabel.text    =   [NSString stringWithFormat:@"%0.2f",speedInKm];
+            self.speedLabel.text    =   [NSString stringWithFormat:@"%0.0f",speedInKm];
         }
         if (_bCurrentIsMapMode) {
             [self.mapVC updateLocation:newLocation];

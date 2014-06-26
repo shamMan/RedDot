@@ -143,8 +143,8 @@
     NSString* str   =   nil;
     switch (key) {
         case MagicDogKeyTypeMode:
-            //str =   @"MODEKEY";
-            str     =   @"UPDATAREG-20140113162212";
+            str =   @"MODEKEY";
+            //str     =   @"UPDATAREG-20140113162212";
             break;
         case MagicDogKeyTypeUp:
             str =   @"UPKEY";
@@ -155,6 +155,8 @@
         case MagicDogKeyTypeMute:
             str =   @"MUTEKEY";
             break;
+            case MagicDogKeyTypeRoad:
+            str =   @"ROADKEY";
         default:
             break;
     }

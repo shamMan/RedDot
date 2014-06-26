@@ -37,6 +37,9 @@
 @property (retain, nonatomic) IBOutlet UIImageView *compassImageView;
 @property (retain, nonatomic) IBOutlet UILabel *speedLabel;
 
+@property (retain, nonatomic) IBOutlet UIImageView *stausViewSat;
+@property (retain, nonatomic) IBOutlet UIImageView *statusViewCloud;
+@property (retain, nonatomic) IBOutlet UIImageView *statusViewBle;
 
 @property (readonly,nonatomic) UIImage*    btnCtrlImageD;
 @property (readonly,nonatomic) UIImage*    btnCtrlImageU;
@@ -60,6 +63,8 @@
 - (IBAction)doMap:(id)sender;
 - (IBAction)doDogControl:(id)sender;
 - (IBAction)doSetting:(id)sender;
+- (void)closeCtrlView;
+-(BOOL)SendVirtualKey:(MagicDogKeyType)key;
 
 
 
