@@ -10,7 +10,9 @@
 #import "RDConfig.h"
 
 @interface RDMagicDog()<CBCentralManagerDelegate,CBPeripheralDelegate>
+@property (retain,nonatomic) CBCharacteristic*  writeChar;
 @property (copy,nonatomic) DogGeneralCommandBlock commandBlock;
+@property (assign,nonatomic) STU_BLUETOOTH_GPS  gpsData;
 -(BOOL)foundAndConnect;
 -(BOOL)cleanUp;
 -(BOOL)writeStr:(NSString*)str;
@@ -105,7 +107,9 @@
 -(BOOL)askUpdateDetail:(DogGeneralCommandBlock) block
 {
     //NSString* command   =   [NSString stringWithFormat:@"UPDATAREG-%@",[self now]];
-    NSString* command   =   @"UPDATAREG-20140113162212";
+    NSString* command   =   @"UPDATAREG";
+    [self writeStr:command];
+    command =   @"20140113162212";
     [self writeStr:command];
     self.commandBlock   =   block;
     _lastCommand    =   DogCommandAdkUpdate;
@@ -119,6 +123,7 @@
 // 定位
 -(BOOL)openNMEAEN
 {
+    _gpsDataLen =   0;
     [self writeStr:@"NMEAEN"];
     _lastCommand    =   DogCommandNMEA;
     return TRUE;
@@ -214,9 +219,12 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    [[Config shareInstance] PLOG:@"%s %@ %@ %@",__func__,peripheral,advertisementData,RSSI];
-    [_centralManager stopScan];
-    [_centralManager connectPeripheral:peripheral options:nil];
+    [[Config shareInstance] PLOG:@"%s %@ ADV:%@ RSSI:%@",__func__,peripheral,advertisementData,RSSI];
+    if ([peripheral.name hasPrefix:@"Ego"])
+    {
+        [_centralManager stopScan];
+        [_centralManager connectPeripheral:peripheral options:nil];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
@@ -289,7 +297,7 @@
         [[Config shareInstance] PLOG:@"charac:%@ ,0x%x",characteristic,characteristic.properties];
         switch (characteristic.properties) {
             case CBCharacteristicPropertyRead:
-                [_peripheral readValueForCharacteristic:characteristic];
+                //[_peripheral readValueForCharacteristic:characteristic];
                 break;
             case CBCharacteristicPropertyWriteWithoutResponse:
                 self.writeChar  =   characteristic;
@@ -305,10 +313,33 @@
         //[_peripheral setNotifyValue:YES forCharacteristic:characteristic];
     }
 }
+
+- (BOOL)fillGPSdata:(NSData*)pData
+{
+    if (!pData) {
+        return FALSE;
+    }
+    int len             =   pData.length;
+    const void* data    =   pData.bytes;
+    memcpy(_gpsDataBuf + _gpsDataLen, data, len);
+    _gpsDataLen +=  len;
+    int needLen = sizeof(STU_BLUETOOTH_GPS);
+    if (_gpsDataLen >= needLen) {
+        STU_BLUETOOTH_GPS* req =   (STU_BLUETOOTH_GPS*)_gpsDataBuf;
+        _gpsData =   *req;
+        _gpsDataLen -=  needLen;
+        self.commandBlock(TRUE);
+        return TRUE;
+    }
+    else
+    {
+        self.commandBlock(FALSE);
+    }
+    return FALSE;
+}
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSString *value = [[[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] autorelease];
-    NSLog(@"Value %@",value);
     [[Config shareInstance] PLOG:@"%s %@ char:%@ value:%@",__func__,error,characteristic,value];
     switch (self.lastCommand) {
         case DogCommandHandShake:
@@ -321,28 +352,29 @@
             }
             else
             {
-                int len     =   characteristic.value.length;
-                const void* data =   characteristic.value.bytes;
-                if (!data || len < sizeof(STU_ASK_UPDATE)) {
-                    [[Config shareInstance] PLOG:@"查询蓝牙信息返回长度不够:%d",len];
-                    self.commandBlock(FALSE);
-                }
-                else
-                {
-                    STU_ASK_UPDATE* req =   (STU_ASK_UPDATE*)data;
-                    _stu_ask_update =   *req;
-                    self.commandBlock(TRUE);
-                }
+                [self fillGPSdata:characteristic.value];
             }
         }
             break;
         case DogCommandAdkUpdate:
         {
-            
+            int len     =   characteristic.value.length;
+            const void* data =   characteristic.value.bytes;
+            if (!data || len < sizeof(STU_ASK_UPDATE)) {
+                [[Config shareInstance] PLOG:@"查询蓝牙信息返回长度不够:%d",len];
+                self.commandBlock(FALSE);
+            }
+            else
+            {
+                STU_ASK_UPDATE* req =   (STU_ASK_UPDATE*)data;
+                _stu_ask_update =   *req;
+                self.commandBlock(TRUE);
+            }
             break;
         }
         case DogCommandNMEA:
         {
+            [self fillGPSdata:characteristic.value];
             break;
         }
         case DogCommandPoi:

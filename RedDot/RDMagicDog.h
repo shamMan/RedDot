@@ -51,6 +51,24 @@ typedef NS_ENUM(NSUInteger, DogCommand) {
     DogCommandRoadInfo          // 路况
 };
 
+// 定位输出结构体
+typedef struct{
+	volatile UINT8  ASK_GPS_HEAD[8];			//包头 GPS_HEAD
+    volatile UINT32 Bule_Latitude;				//纬度	X10000
+	volatile UINT32 Bule_Longitude;				//经度	X10000
+	volatile UINT16 Bule_GroundSpeed;			//相对位移速度 KM/S
+	volatile UINT16 Bule_Course;					//相对位移方向
+	volatile UINT8 Bule_Year;					//年 北京时间
+	volatile UINT8 Bule_Month;					//月
+	volatile UINT8 Bule_Day;					//日
+	volatile UINT8 Bule_Hour;					//时
+	volatile UINT8 Bule_Minute;					//分
+	volatile UINT8 Bule_Second;					//秒
+	volatile UINT8 RESERVED[2];					//预留
+}STU_BLUETOOTH_GPS;
+
+#define GPS_BUFFER_LEN  56
+
 @class RDMagicDog;
 
 @protocol DogDelegate <NSObject>
@@ -63,6 +81,10 @@ typedef NS_ENUM(NSUInteger, DogCommand) {
 @end
 
 @interface RDMagicDog : NSObject
+{
+    int _gpsDataLen;
+    unsigned char _gpsDataBuf[GPS_BUFFER_LEN];
+}
 @property (assign,nonatomic) id<DogDelegate>    delegate;
 @property (retain,nonatomic) CBCentralManager*  centralManager;
 @property (retain,nonatomic) CBPeripheral*      peripheral;
@@ -72,8 +94,6 @@ typedef NS_ENUM(NSUInteger, DogCommand) {
 @property (readonly,nonatomic) NSString*        modename;
 // 升级详细信息
 @property (readonly,nonatomic) STU_ASK_UPDATE   stu_ask_update;
-// TEST
-@property (retain,nonatomic) CBCharacteristic*  writeChar;
 
 +(RDMagicDog*)linkDogWithDelegate:(id<DogDelegate>)delegate;
 // 握手

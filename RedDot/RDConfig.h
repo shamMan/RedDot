@@ -42,6 +42,13 @@ static NSString* UNUSED_PARAM(kBaiduMapKey)   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 @interface Config : NSObject
 @property (assign,nonatomic) id<DebugProctocal> delegateD;
 
+// 设置属性
+@property (assign, nonatomic) BOOL allowUpdateOn3G;
+@property (assign, nonatomic) BOOL autoConnect;
+@property (assign, nonatomic) BOOL autoUpdate;
+@property (assign, nonatomic) BOOL canReportInBackground;
+
+
 #pragma mark - Singleton
 + (Config*)shareInstance;
 #pragma mark - Unity
@@ -52,5 +59,6 @@ static NSString* UNUSED_PARAM(kBaiduMapKey)   =   @"XG44GGahgs0Xt1rAtvAOxKWm";
 #pragma mark - 升级服务器地址及端口
 - (NSString*)GetServerAddress;
 - (unsigned short)GetServerPort;
+- (void)resetSettingData;
 
 @end

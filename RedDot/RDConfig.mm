@@ -8,6 +8,10 @@
 
 #include "RDConfig.h"
 
+#define kAllowUpdateOn3G        @"kAllowUpdateOn3G"
+#define kAutoConnect            @"kAutoConnect"
+#define kAutoUpdate             @"kAutoUpdate"
+#define KCanReportInBackground  @"kCanReportInBackground"
 
 @implementation Config
 
@@ -34,6 +38,65 @@
 - (unsigned short)GetServerPort
 {
     return 21211;
+}
+- (void)saveUserDefaultValue:(BOOL)value forKey:(NSString*)key
+{
+    NSUserDefaults* userDefault =   [NSUserDefaults standardUserDefaults];
+    [userDefault setBool:value forKey:key];
+    [userDefault synchronize];
+}
+- (BOOL)getUserDefaultForKey:(NSString*)key default:(BOOL)dValue
+{
+    NSUserDefaults* userDefault =   [NSUserDefaults standardUserDefaults];
+    BOOL    ret;
+    if (nil == [userDefault objectForKey:key])
+    {
+        ret = dValue;
+    }
+    else
+    {
+        ret   =   [userDefault boolForKey:key];
+    }
+    return ret;
+}
+- (BOOL)allowUpdateOn3G
+{
+    return [self getUserDefaultForKey:kAllowUpdateOn3G default:YES];
+}
+- (void)setAllowUpdateOn3G:(BOOL)allowUpdateOn3G
+{
+    [self saveUserDefaultValue:allowUpdateOn3G forKey:kAllowUpdateOn3G];
+}
+- (BOOL)autoConnect
+{
+    return [self getUserDefaultForKey:kAutoConnect default:YES];
+}
+- (void)setAutoConnect:(BOOL)autoConnect
+{
+    [self saveUserDefaultValue:autoConnect forKey:kAutoConnect];
+}
+- (BOOL)autoUpdate
+{
+    return [self getUserDefaultForKey:kAutoUpdate default:YES];
+}
+- (void)setAutoUpdate:(BOOL)autoUpdate
+{
+    [self saveUserDefaultValue:autoUpdate forKey:kAutoUpdate];
+}
+- (BOOL)canReportInBackground
+{
+    return [self getUserDefaultForKey:KCanReportInBackground default:YES];
+}
+- (void)setCanReportInBackground:(BOOL)canReportInBackground
+{
+    [self saveUserDefaultValue:canReportInBackground forKey:KCanReportInBackground];
+}
+- (void)resetSettingData
+{
+    [self saveUserDefaultValue:YES forKey:kAllowUpdateOn3G];
+    [self saveUserDefaultValue:YES forKey:kAutoConnect];
+    [self saveUserDefaultValue:YES forKey:kAutoUpdate];
+    [self saveUserDefaultValue:YES forKey:KCanReportInBackground];
 }
 
 - (void)PLOG:(NSString *)format, ...

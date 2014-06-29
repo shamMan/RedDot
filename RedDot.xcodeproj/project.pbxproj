@@ -82,6 +82,10 @@
 		04945952193EF41600F5B03C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04945951193EF41600F5B03C /* CoreBluetooth.framework */; };
 		4502841C19568F7A00EF1D29 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4502841B19568F7A00EF1D29 /* AudioToolbox.framework */; };
 		451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 451EF9EC19444BC3000689B3 /* RDNetwork.m */; };
+		451F0701195E93F50023A00D /* RDSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F06FF195E93F50023A00D /* RDSettingVC.m */; };
+		451F0702195E93F50023A00D /* RDSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451F0700195E93F50023A00D /* RDSettingVC.xib */; };
+		4589B11E19604CEF00951EF3 /* RDOffLineMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4589B11C19604CEF00951EF3 /* RDOffLineMapVC.m */; };
+		4589B11F19604CEF00951EF3 /* RDOffLineMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4589B11D19604CEF00951EF3 /* RDOffLineMapVC.xib */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
 		458DA128195C52EB00F80555 /* RDBLEControlVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */; };
 		458DA129195C52EB00F80555 /* RDBLEControlVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */; };
@@ -286,6 +290,12 @@
 		4502841B19568F7A00EF1D29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		451EF9EC19444BC3000689B3 /* RDNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNetwork.m; sourceTree = "<group>"; };
 		451EF9ED19444BC3000689B3 /* RDNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNetwork.h; sourceTree = "<group>"; };
+		451F06FE195E93F50023A00D /* RDSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDSettingVC.h; sourceTree = "<group>"; };
+		451F06FF195E93F50023A00D /* RDSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDSettingVC.m; sourceTree = "<group>"; };
+		451F0700195E93F50023A00D /* RDSettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RDSettingVC.xib; sourceTree = "<group>"; };
+		4589B11B19604CEF00951EF3 /* RDOffLineMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDOffLineMapVC.h; sourceTree = "<group>"; };
+		4589B11C19604CEF00951EF3 /* RDOffLineMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDOffLineMapVC.m; sourceTree = "<group>"; };
+		4589B11D19604CEF00951EF3 /* RDOffLineMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RDOffLineMapVC.xib; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
 		458DA125195C52EB00F80555 /* RDBLEControlVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBLEControlVCViewController.h; sourceTree = "<group>"; };
@@ -635,6 +645,12 @@
 				458DA125195C52EB00F80555 /* RDBLEControlVCViewController.h */,
 				458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */,
 				458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */,
+				451F06FE195E93F50023A00D /* RDSettingVC.h */,
+				451F06FF195E93F50023A00D /* RDSettingVC.m */,
+				451F0700195E93F50023A00D /* RDSettingVC.xib */,
+				4589B11B19604CEF00951EF3 /* RDOffLineMapVC.h */,
+				4589B11C19604CEF00951EF3 /* RDOffLineMapVC.m */,
+				4589B11D19604CEF00951EF3 /* RDOffLineMapVC.xib */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -816,6 +832,7 @@
 				45D0BD2B1951C1BB0025060B /* bluetooth_d.png in Resources */,
 				0470497C1936C84300182A69 /* RDMainVC.xib in Resources */,
 				45D0BD431951C1C30025060B /* remote_control_x.png in Resources */,
+				451F0702195E93F50023A00D /* RDSettingVC.xib in Resources */,
 				047049851937005700182A69 /* RDMapVC.xib in Resources */,
 				45D0BD341951C1BB0025060B /* control_plus_u.png in Resources */,
 				45D0BD2C1951C1BB0025060B /* bluetooth_u.png in Resources */,
@@ -831,6 +848,7 @@
 				040A9E2F195C1A2D0020304F /* icon_1_4.png in Resources */,
 				040A9E30195C1A2D0020304F /* icon_1_5.png in Resources */,
 				040A9E31195C1A2D0020304F /* icon_1_6.png in Resources */,
+				4589B11F19604CEF00951EF3 /* RDOffLineMapVC.xib in Resources */,
 				040A9E32195C1A2D0020304F /* icon_1_7.png in Resources */,
 				040A9E33195C1A2D0020304F /* icon_2_03.png in Resources */,
 				458DA135195C56D500F80555 /* img_minus_u.png in Resources */,
@@ -923,6 +941,7 @@
 				0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */,
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
+				451F0701195E93F50023A00D /* RDSettingVC.m in Sources */,
 				45BCAA95193DF3540057623A /* RDLocationTools.m in Sources */,
 				047049841937005700182A69 /* RDMapVC.m in Sources */,
 				451EF9EE19444BC3000689B3 /* RDNetwork.m in Sources */,
@@ -936,6 +955,7 @@
 				45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */,
 				45B8461B194F20EC00909937 /* dogDefine.c in Sources */,
 				45B84622194F20EC00909937 /* Utils.cpp in Sources */,
+				4589B11E19604CEF00951EF3 /* RDOffLineMapVC.m in Sources */,
 				45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */,
 				45B84620194F20EC00909937 /* thread.cpp in Sources */,
 				45B8461F194F20EC00909937 /* Socket.cpp in Sources */,
@@ -1030,6 +1050,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1039,8 +1060,8 @@
 			baseConfigurationReference = 9ACC6029ADB74FB684844810 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = RedDot/RedDot.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RedDot/RedDot-Prefix.pch";
 				INFOPLIST_FILE = "RedDot/RedDot-Info.plist";
@@ -1052,7 +1073,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "260DE134-8CF5-423F-BC79-D31E05FDB8B1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "260DE134-8CF5-423F-BC79-D31E05FDB8B1";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

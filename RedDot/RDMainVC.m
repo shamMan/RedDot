@@ -12,6 +12,7 @@
 #import "RDMagicDog.h"
 #import "RDInnerLocationService.h"
 #import "RDBLEControlVCViewController.h"
+#import "RDSettingVC.h"
 
 
 @interface RDMainVC ()<DogDelegate>
@@ -164,8 +165,8 @@
 
 
 - (IBAction)doSetting:(id)sender {
-    //RDNetwork* network  =   [RDNetwork ShareInstance];
-    //[network connectToServer];
+    RDSettingVC* vc =   [[[RDSettingVC alloc] initWithNibName:@"RDSettingVC" bundle:nil] autorelease];
+    [self.navigationController pushViewController:vc animated:TRUE];
 }
 
 // 打开遥控器窗口
