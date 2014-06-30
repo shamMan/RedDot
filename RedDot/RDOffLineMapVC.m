@@ -8,7 +8,7 @@
 
 #import "RDOffLineMapVC.h"
 
-@interface RDOffLineMapVC ()<BMKOfflineMapDelegate>
+@interface RDOffLineMapVC ()<BMKOfflineMapDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -41,6 +41,12 @@
     _arrayOfflineCityData = [[_offlineMap getOfflineCityList]retain];
     //初始化Segment
     self.segment.selectedSegmentIndex = 0;
+    self.tableView1.delegate    =   self;
+    self.tableView2.delegate    =   self;
+    self.tableView3.delegate    =   self;
+    self.tableView1.dataSource  =   self;
+    self.tableView2.dataSource  =   self;
+    self.tableView3.dataSource  =   self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -71,6 +77,22 @@
     }
     [super dealloc];
 }
+-(void)updateMaplist
+{
+    self.arrayDownLoadingMapInfo        =   [NSMutableArray arrayWithCapacity:100];
+    self.arraylocalDownLoadMapInfo      =   [NSMutableArray arrayWithCapacity:100];
+    
+    NSArray* array  =   [_offlineMap getAllUpdateInfo];
+    for (BMKOLUpdateElement* updateInfo in array) {
+        if (updateInfo.ratio == 100) {
+            [self.arraylocalDownLoadMapInfo addObject:updateInfo];
+        }
+        else
+        {
+            [self.arrayDownLoadingMapInfo addObject:updateInfo];
+        }
+    }
+}
 - (IBAction)segmentChanged:(id)sender {
     UISegmentedControl* control = (UISegmentedControl*)sender;
     switch (control.selectedSegmentIndex) {
@@ -88,7 +110,7 @@
             self.tableView2.hidden  = NO;
             self.tableView3.hidden  = YES;
             //获取各城市离线地图更新信息
-            //_arraylocalDownLoadMapInfo = [[NSMutableArray arrayWithArray:[_offlineMap getAllUpdateInfo]] retain];
+            [self updateMaplist];
             [self.tableView2 reloadData];
         }
             break;
@@ -98,7 +120,7 @@
             self.tableView2.hidden  = YES;
             self.tableView3.hidden  = NO;
             //获取各城市离线地图更新信息
-            _arraylocalDownLoadMapInfo = [[NSMutableArray arrayWithArray:[_offlineMap getAllUpdateInfo]] retain];
+            [self updateMaplist];
             [self.tableView3 reloadData];
         }
             break;
@@ -106,21 +128,29 @@
             break;
     }
 }
+
 //离线地图delegate，用于获取通知
 - (void)onGetOfflineMapState:(int)type withState:(int)state
 {
-    
-    if (type == TYPE_OFFLINE_UPDATE) {
-        //id为state的城市正在下载或更新，start后会毁掉此类型
-        BMKOLUpdateElement* updateInfo;
-        updateInfo = [_offlineMap getUpdateInfo:state];
-        NSLog(@"城市名：%@,下载比例:%d",updateInfo.cityName,updateInfo.ratio);
-    }
-    if (type == TYPE_OFFLINE_NEWVER) {
-        //id为state的state城市有新版本,可调用update接口进行更新
-        BMKOLUpdateElement* updateInfo;
-        updateInfo = [_offlineMap getUpdateInfo:state];
-        NSLog(@"是否有更新%d",updateInfo.update);
+    if (type == TYPE_OFFLINE_UPDATE || type == TYPE_OFFLINE_NEWVER) {
+        [self updateMaplist];
+        if (type == TYPE_OFFLINE_UPDATE) {
+            //id为state的城市正在下载或更新，start后会毁掉此类型
+            BMKOLUpdateElement* updateInfo;
+            updateInfo = [_offlineMap getUpdateInfo:state];
+            NSLog(@"城市名：%@,下载比例:%d",updateInfo.cityName,updateInfo.ratio);
+            [self.tableView2 reloadData];
+            if (updateInfo.ratio == 100) {
+                [self.tableView3 reloadData];
+            }
+        }
+        if (type == TYPE_OFFLINE_NEWVER) {
+            //id为state的state城市有新版本,可调用update接口进行更新
+            BMKOLUpdateElement* updateInfo;
+            updateInfo = [_offlineMap getUpdateInfo:state];
+            NSLog(@"是否有更新%d",updateInfo.update);
+            [self.tableView3 reloadData];
+        }
     }
     if (type == TYPE_OFFLINE_UNZIP) {
         //正在解压第state个离线包，导入时会回调此类型
@@ -203,7 +233,7 @@
     }
     else if(tableView == self.tableView2)
     {
-        return 0;
+        return [_arrayDownLoadingMapInfo count];
     }
     else
     {
@@ -252,21 +282,33 @@
     }
     else if(tableView == self.tableView2)
     {
-        
+        if(_arrayDownLoadingMapInfo!=nil  &&  _arrayDownLoadingMapInfo.count > indexPath.row)
+        {
+            BMKOLUpdateElement* item = [self.arrayDownLoadingMapInfo objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@(%@/%@)", item.cityName,[self getDataSizeString:item.ratio * item.size / 100],[self getDataSizeString:item.size]];
+//            UIProgressView* processView =   [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
+//            processView.frame       =   CGRectMake(100, 0, 160, 40);
+//            processView.progress    =   item.ratio / 100.0f;
+//            [cell.contentView addSubview:processView];
+        }
+        else
+        {
+            cell.textLabel.text = @"";
+        }
     }
     else
     {
-        if(_arraylocalDownLoadMapInfo!=nil&&_arraylocalDownLoadMapInfo.count>indexPath.row)
+        if(_arraylocalDownLoadMapInfo!=nil  &&  _arraylocalDownLoadMapInfo.count>indexPath.row)
         {
             BMKOLUpdateElement* item = [_arraylocalDownLoadMapInfo objectAtIndex:indexPath.row];
             //是否可更新
             if(item.update)
             {
-                cell.textLabel.text = [NSString stringWithFormat:@"%@————%d(可更新)", item.cityName,item.ratio];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@(可更新)", item.cityName];
             }
             else
             {
-                cell.textLabel.text = [NSString stringWithFormat:@"%@————%d", item.cityName,item.ratio];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", item.cityName];
             }
         }
         else
@@ -312,7 +354,27 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(tableView == self.tableView3)
+    if (tableView == self.tableView1)
+    {
+        int sec =   indexPath.section;
+        int row =   indexPath.row;
+        BMKOLSearchRecord*  record  =   nil;
+        if (sec == 0) {
+            // 热门城市
+            record  =   [_arrayHotCityData objectAtIndex:row];
+        }
+        else
+        {
+            // 全国
+            record  =   [_arrayOfflineCityData objectAtIndex:row];
+        }
+        [_offlineMap start:record.cityID];
+    }
+    else if (tableView == self.tableView2)
+    {
+        
+    }
+    else
     {
 //        BMKOLUpdateElement* item = [_arraylocalDownLoadMapInfo objectAtIndex:indexPath.row];
 //        if(item.ratio==100 && item.update)//跳转到地图查看页面进行地图更新
@@ -341,41 +403,41 @@
 //        }
         
     }
-    else
-    {
-        //获得当前选中的城市信息
-        if(indexPath.section==0)
-        {
-            BMKOLSearchRecord* item = [_arrayHotCityData objectAtIndex:indexPath.row];
-            //显示子cell
-            if(item.childCities != nil && item.childCities.count > 0)
-            {
-                for (BMKOLSearchRecord* childitem in item.childCities)
-                {
-                    NSString* tempStri = [NSString stringWithFormat:@"%@(%d)", childitem.cityName, childitem.cityID];
-                    //转换包大小
-                    NSString* tempPackSize = [self getDataSizeString:childitem.size];
-                    NSLog(@"热门城市：%@--包大小：%@",tempStri,tempPackSize);
-                }
-            }
-        }
-        else if(indexPath.section==1)
-        {
-            BMKOLSearchRecord* item = [_arrayOfflineCityData objectAtIndex:indexPath.row];
-            //显示子cell
-            if(item.childCities != nil && item.childCities.count > 0)
-            {
-                for (BMKOLSearchRecord* childitem in item.childCities)
-                {
-                    NSString* tempStri = [NSString stringWithFormat:@"%@(%d)", childitem.cityName, childitem.cityID];
-                    //转换包大小
-                    NSString* tempPackSize = [self getDataSizeString:childitem.size];
-                    NSLog(@"支持离线包城市：%@--包大小：%@",tempStri,tempPackSize);
-                }
-            }
-        }
-        
-    }
+//    else
+//    {
+//        //获得当前选中的城市信息
+//        if(indexPath.section==0)
+//        {
+//            BMKOLSearchRecord* item = [_arrayHotCityData objectAtIndex:indexPath.row];
+//            //显示子cell
+//            if(item.childCities != nil && item.childCities.count > 0)
+//            {
+//                for (BMKOLSearchRecord* childitem in item.childCities)
+//                {
+//                    NSString* tempStri = [NSString stringWithFormat:@"%@(%d)", childitem.cityName, childitem.cityID];
+//                    //转换包大小
+//                    NSString* tempPackSize = [self getDataSizeString:childitem.size];
+//                    NSLog(@"热门城市：%@--包大小：%@",tempStri,tempPackSize);
+//                }
+//            }
+//        }
+//        else if(indexPath.section==1)
+//        {
+//            BMKOLSearchRecord* item = [_arrayOfflineCityData objectAtIndex:indexPath.row];
+//            //显示子cell
+//            if(item.childCities != nil && item.childCities.count > 0)
+//            {
+//                for (BMKOLSearchRecord* childitem in item.childCities)
+//                {
+//                    NSString* tempStri = [NSString stringWithFormat:@"%@(%d)", childitem.cityName, childitem.cityID];
+//                    //转换包大小
+//                    NSString* tempPackSize = [self getDataSizeString:childitem.size];
+//                    NSLog(@"支持离线包城市：%@--包大小：%@",tempStri,tempPackSize);
+//                }
+//            }
+//        }
+//        
+//    }
     
 }
 
@@ -457,5 +519,4 @@
 	}
 	return string;
 }
-
 @end

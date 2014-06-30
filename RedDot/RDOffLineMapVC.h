@@ -12,14 +12,19 @@
 @interface RDOffLineMapVC : UIViewController
 {
     BMKOfflineMap* _offlineMap;
-    NSArray* _arrayHotCityData;         //热门城市
-    NSArray* _arrayOfflineCityData;     //全国支持离线地图的城市
-    NSMutableArray * _arraylocalDownLoadMapInfo;    //本地下载的离线地图
+    NSArray* _arrayHotCityData;                     //热门城市
+    NSArray* _arrayOfflineCityData;                 //全国支持离线地图的城市
+    //NSMutableArray * _arrayDownLoadingMapInfo;      //正在下载的离线地图
+    //NSMutableArray * _arraylocalDownLoadMapInfo;    //本地下载的离线地图
 }
 @property (retain, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (retain, nonatomic) IBOutlet UITableView *tableView1;
 @property (retain, nonatomic) IBOutlet UITableView *tableView2;
 @property (retain, nonatomic) IBOutlet UITableView *tableView3;
+
+@property (retain, nonatomic) NSMutableArray*   arrayDownLoadingMapInfo;
+@property (retain, nonatomic) NSMutableArray*   arraylocalDownLoadMapInfo;
+
 - (IBAction)segmentChanged:(id)sender;
 
 @end

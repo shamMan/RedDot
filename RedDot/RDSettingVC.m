@@ -8,6 +8,7 @@
 
 #import "RDSettingVC.h"
 #import "RDConfig.h"
+#import "RDOffLineMapVC.h"
 
 @interface RDSettingVC ()
 - (void)updateSwitchAtIndexPath:(id)sender;
@@ -43,14 +44,7 @@
     [_tableView release];
     [super dealloc];
 }
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:FALSE animated:TRUE];
-}
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:TRUE animated:TRUE];
-}
+
 #pragma mark -- UITableViewDelegate
 - (void)deselect:(id)sender
 {
@@ -79,11 +73,17 @@
             case 2:
                 // 软件版本信息
                 break;
+            case 3:
+                // 离线地图
+            {
+                RDOffLineMapVC* vc  =   [[[RDOffLineMapVC alloc] initWithNibName:@"RDOffLineMapVC" bundle:nil] autorelease];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
             default:
                 break;
         }
     }
-    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -124,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int ret[]   =   {3,1,3};
+    int ret[]   =   {3,1,4};
     return ret[section];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,6 +199,10 @@
                     cell.accessoryView  =   nil;
                     cell.accessoryType  =   UITableViewCellAccessoryDisclosureIndicator;
                     break;
+                case 3:
+                    cell.textLabel.text =   @"离线地图";
+                    cell.accessoryView  =   nil;
+                    cell.accessoryType  =   UITableViewCellAccessoryDisclosureIndicator;
                 default:
                     break;
             }
