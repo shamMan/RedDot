@@ -86,6 +86,11 @@
 		451F0702195E93F50023A00D /* RDSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451F0700195E93F50023A00D /* RDSettingVC.xib */; };
 		4589B11E19604CEF00951EF3 /* RDOffLineMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4589B11C19604CEF00951EF3 /* RDOffLineMapVC.m */; };
 		4589B11F19604CEF00951EF3 /* RDOffLineMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4589B11D19604CEF00951EF3 /* RDOffLineMapVC.xib */; };
+		458A019F196304FF00294E7A /* CommReadThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458A0194196304FF00294E7A /* CommReadThread.cpp */; };
+		458A01A0196304FF00294E7A /* GPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458A0196196304FF00294E7A /* GPS.cpp */; };
+		458A01A1196304FF00294E7A /* GPS_Calman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458A0198196304FF00294E7A /* GPS_Calman.cpp */; };
+		458A01A2196304FF00294E7A /* GPS_Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458A019A196304FF00294E7A /* GPS_Filter.cpp */; };
+		458A01A3196304FF00294E7A /* GPS_If.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458A019C196304FF00294E7A /* GPS_If.cpp */; };
 		458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */ = {isa = PBXBuildFile; fileRef = 458B5E5A1945F46300F8BCEA /* gprsProc.c */; };
 		458DA128195C52EB00F80555 /* RDBLEControlVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DA126195C52EB00F80555 /* RDBLEControlVCViewController.m */; };
 		458DA129195C52EB00F80555 /* RDBLEControlVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458DA127195C52EB00F80555 /* RDBLEControlVCViewController.xib */; };
@@ -296,6 +301,17 @@
 		4589B11B19604CEF00951EF3 /* RDOffLineMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDOffLineMapVC.h; sourceTree = "<group>"; };
 		4589B11C19604CEF00951EF3 /* RDOffLineMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDOffLineMapVC.m; sourceTree = "<group>"; };
 		4589B11D19604CEF00951EF3 /* RDOffLineMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RDOffLineMapVC.xib; sourceTree = "<group>"; };
+		458A0194196304FF00294E7A /* CommReadThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommReadThread.cpp; sourceTree = "<group>"; };
+		458A0195196304FF00294E7A /* CommReadThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommReadThread.h; sourceTree = "<group>"; };
+		458A0196196304FF00294E7A /* GPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPS.cpp; sourceTree = "<group>"; };
+		458A0197196304FF00294E7A /* GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS.h; sourceTree = "<group>"; };
+		458A0198196304FF00294E7A /* GPS_Calman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPS_Calman.cpp; sourceTree = "<group>"; };
+		458A0199196304FF00294E7A /* GPS_Calman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS_Calman.h; sourceTree = "<group>"; };
+		458A019A196304FF00294E7A /* GPS_Filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPS_Filter.cpp; sourceTree = "<group>"; };
+		458A019B196304FF00294E7A /* GPS_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS_Filter.h; sourceTree = "<group>"; };
+		458A019C196304FF00294E7A /* GPS_If.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPS_If.cpp; sourceTree = "<group>"; };
+		458A019D196304FF00294E7A /* GPS_If.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS_If.h; sourceTree = "<group>"; };
+		458A019E196304FF00294E7A /* GPS_Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS_Info.h; sourceTree = "<group>"; };
 		458B5E5A1945F46300F8BCEA /* gprsProc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gprsProc.c; sourceTree = "<group>"; };
 		458B5E5B1945F46300F8BCEA /* gprsProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gprsProc.h; sourceTree = "<group>"; };
 		458DA125195C52EB00F80555 /* RDBLEControlVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDBLEControlVCViewController.h; sourceTree = "<group>"; };
@@ -434,6 +450,7 @@
 		047049211936C4EE00182A69 /* RedDot */ = {
 			isa = PBXGroup;
 			children = (
+				458A0193196304FF00294E7A /* GPS */,
 				4502841A19568F7900EF1D29 /* RedDot.entitlements */,
 				45B84607194F20EC00909937 /* RDDemoUpdater */,
 				0494594C193EAF3E00F5B03C /* bluetooth */,
@@ -691,6 +708,24 @@
 			path = network;
 			sourceTree = "<group>";
 		};
+		458A0193196304FF00294E7A /* GPS */ = {
+			isa = PBXGroup;
+			children = (
+				458A0194196304FF00294E7A /* CommReadThread.cpp */,
+				458A0195196304FF00294E7A /* CommReadThread.h */,
+				458A0196196304FF00294E7A /* GPS.cpp */,
+				458A0197196304FF00294E7A /* GPS.h */,
+				458A0198196304FF00294E7A /* GPS_Calman.cpp */,
+				458A0199196304FF00294E7A /* GPS_Calman.h */,
+				458A019A196304FF00294E7A /* GPS_Filter.cpp */,
+				458A019B196304FF00294E7A /* GPS_Filter.h */,
+				458A019C196304FF00294E7A /* GPS_If.cpp */,
+				458A019D196304FF00294E7A /* GPS_If.h */,
+				458A019E196304FF00294E7A /* GPS_Info.h */,
+			);
+			path = GPS;
+			sourceTree = "<group>";
+		};
 		45B84607194F20EC00909937 /* RDDemoUpdater */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,9 +971,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458A01A1196304FF00294E7A /* GPS_Calman.cpp in Sources */,
+				458A01A3196304FF00294E7A /* GPS_If.cpp in Sources */,
 				047049281936C4EE00182A69 /* main.m in Sources */,
 				458B5E5C1945F46300F8BCEA /* gprsProc.c in Sources */,
 				0470492C1936C4EE00182A69 /* RDAppDelegate.mm in Sources */,
+				458A01A2196304FF00294E7A /* GPS_Filter.cpp in Sources */,
 				0470497B1936C84300182A69 /* RDMainVC.m in Sources */,
 				047049801936DA8A00182A69 /* RDConfig.mm in Sources */,
 				451F0701195E93F50023A00D /* RDSettingVC.m in Sources */,
@@ -951,11 +989,13 @@
 				04945949193DC27000F5B03C /* RDBaseLocationService.m in Sources */,
 				0494594A193DC27000F5B03C /* RDExternalLocationService.m in Sources */,
 				45B8461E194F20EC00909937 /* Event.cpp in Sources */,
+				458A019F196304FF00294E7A /* CommReadThread.cpp in Sources */,
 				0494594B193DC27000F5B03C /* RDinnerLocationService.m in Sources */,
 				45B8461C194F20EC00909937 /* AutoLock.cpp in Sources */,
 				45B8461B194F20EC00909937 /* dogDefine.c in Sources */,
 				45B84622194F20EC00909937 /* Utils.cpp in Sources */,
 				4589B11E19604CEF00951EF3 /* RDOffLineMapVC.m in Sources */,
+				458A01A0196304FF00294E7A /* GPS.cpp in Sources */,
 				45B8461D194F20EC00909937 /* DataStruct.cpp in Sources */,
 				45B84620194F20EC00909937 /* thread.cpp in Sources */,
 				45B8461F194F20EC00909937 /* Socket.cpp in Sources */,
